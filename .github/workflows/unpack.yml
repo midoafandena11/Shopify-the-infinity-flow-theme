@@ -1,0 +1,25 @@
+name: Unpack theme zip
+on:
+  push:
+    paths: ['*.zip']
+permissions:
+  contents: write
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace theme files with zip contents
+        run: |
+          mkdir /tmp/new
+          unzip -q "$(ls *.zip | head -1)" -d /tmp/new
+          for d in assets config layout locales sections snippets templates blocks; do rm -rf "$d"; done
+          cp -r /tmp/new/. .
+          rm -f *.zip
+      - name: Commit
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Update theme from zip" || exit 0
+          git push
