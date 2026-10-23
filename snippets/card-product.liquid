@@ -42,7 +42,30 @@
   -%}
 
   <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}">
-    <div class="card-wrapper product-card-wrapper underline-links-hover">
+    {%- liquid
+      assign flow_on = false
+      assign flow_multi = false
+      if settings.flow_enabled and card_product.available
+        assign flow_on = true
+      endif
+      if card_product.variants_count > 1
+        assign flow_multi = true
+      endif
+    -%}
+    <div
+      class="card-wrapper product-card-wrapper underline-links-hover"
+      {% if flow_on %}
+        data-flow-card
+        data-flow-available="true"
+        data-flow-multi="{{ flow_multi }}"
+        data-flow-handle="{{ card_product.handle }}"
+        data-flow-title="{{ card_product.title | escape }}"
+      {% endif %}
+    >
+      {%- if flow_on -%}
+        {%- assign flow_form_id = 'flow-form-' | append: section_id | append: '-' | append: card_product.id -%}
+        {%- render 'flow-card-controls', card_product: card_product, form_id: flow_form_id, flow_multi: flow_multi -%}
+      {%- endif -%}
       <div
         class="
           card card--{{ settings.card_style }}

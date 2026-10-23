@@ -274,7 +274,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
@@ -527,6 +526,28 @@
       "max_characters": "{{ max_chars }} characters max",
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
+    }
+  },
+  "flow": {
+    "dock": {
+      "aria": "Cart — drop products here",
+      "drop_here": "Drop here"
+    },
+    "card": {
+      "add_aria": "Add {{ product_name }} to cart"
+    },
+    "hint": {
+      "mouse": "Drag a product and drop it on the cart to add it",
+      "touch": "Press and hold a product, then drag it to the cart to add it"
+    },
+    "sheet": {
+      "add": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable"
+    },
+    "toast": {
+      "added": "[title] added to cart",
+      "error": "Couldn't add to cart. Please try again."
     }
   }
 }

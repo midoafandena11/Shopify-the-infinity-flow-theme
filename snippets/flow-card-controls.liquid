@@ -1,0 +1,31 @@
+{%- comment -%}
+  Infinity Flow: real add-to-cart form (hidden) + visible "+" fallback for one product card.
+  Accepts: card_product, section_id, flow_multi
+{%- endcomment -%}
+{%- liquid
+  assign variant = card_product.selected_or_first_available_variant
+  assign min_qty = variant.quantity_rule.min | default: 1
+-%}
+{%- form 'product',
+  card_product,
+  id: form_id,
+  class: 'flow-form visually-hidden',
+  novalidate: 'novalidate',
+  data-flow-form: 'true'
+-%}
+  <input type="hidden" name="id" value="{{ variant.id }}">
+  <input type="hidden" name="quantity" value="{{ min_qty }}">
+  <button type="submit" name="add" tabindex="-1" aria-hidden="true" data-flow-submit>
+    {{ 'products.product.add_to_cart' | t }}
+  </button>
+{%- endform -%}
+<button
+  type="button"
+  class="flow-add"
+  data-flow-add
+  aria-label="{{ 'flow.card.add_aria' | t: product_name: card_product.title | escape }}"
+>
+  <span class="flow-add__plus" aria-hidden="true">
+    {{- 'icon-plus.svg' | inline_asset_content -}}
+  </span>
+</button>

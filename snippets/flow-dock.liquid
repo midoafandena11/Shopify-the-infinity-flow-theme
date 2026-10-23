@@ -1,0 +1,59 @@
+{%- comment -%}
+  Infinity Flow: floating cart dock, drag hint, toast and variant sheet.
+  Rendered once in layout/theme.liquid.
+{%- endcomment -%}
+{%- if settings.flow_enabled and template.name != 'cart' -%}
+  <script>
+    window.flowStrings = {
+      added: {{ 'flow.toast.added' | t: title: '[title]' | json }},
+      error: {{ 'flow.toast.error' | t | json }},
+      hint_mouse: {{ 'flow.hint.mouse' | t | json }},
+      hint_touch: {{ 'flow.hint.touch' | t | json }},
+      sheet_add: {{ 'flow.sheet.add' | t | json }},
+      sheet_sold_out: {{ 'flow.sheet.sold_out' | t | json }},
+      sheet_unavailable: {{ 'flow.sheet.unavailable' | t | json }}
+    };
+  </script>
+
+  <flow-dock
+    class="flow-dock flow-dock--{{ settings.flow_dock_position }}"
+    data-after-drop="{{ settings.flow_after_drop }}"
+    data-haptics="{{ settings.flow_haptics }}"
+    data-hint="{{ settings.flow_show_hint }}"
+  >
+    <a
+      href="{{ routes.cart_url }}"
+      class="flow-dock__btn"
+      aria-label="{{ 'flow.dock.aria' | t }}"
+    >
+      <span class="flow-dock__ring" aria-hidden="true"></span>
+      <span class="flow-dock__icon" aria-hidden="true">{{- 'icon-cart.svg' | inline_asset_content -}}</span>
+      <span class="flow-dock__count{% if cart.item_count == 0 %} hidden{% endif %}">{{ cart.item_count }}</span>
+    </a>
+
+    <span class="flow-dock__label" aria-hidden="true">{{ 'flow.dock.drop_here' | t }}</span>
+
+    <div class="flow-hint" role="note" hidden>
+      <svg class="flow-hint__arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M3 10h13M11 5l5 5-5 5"/>
+      </svg>
+      <span></span>
+      <button type="button" class="flow-hint__x" aria-label="{{ 'accessibility.close' | t }}">&times;</button>
+    </div>
+
+    <div class="flow-toast" role="status" aria-live="polite"></div>
+
+    <div class="flow-sheet" hidden>
+      <div class="flow-sheet__scrim" data-flow-close></div>
+      <div class="flow-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="FlowSheetTitle" tabindex="-1">
+        <button type="button" class="flow-sheet__close" data-flow-close aria-label="{{ 'accessibility.close' | t }}">
+          {{- 'icon-close.svg' | inline_asset_content -}}
+        </button>
+        <p class="flow-sheet__title" id="FlowSheetTitle"></p>
+        <p class="flow-sheet__price"></p>
+        <div class="flow-sheet__options"></div>
+        <button type="button" class="flow-sheet__add button button--full-width"><span>{{ 'flow.sheet.add' | t }}</span></button>
+      </div>
+    </div>
+  </flow-dock>
+{%- endif -%}
