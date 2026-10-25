@@ -41,9 +41,7 @@
         id: product_form_id,
         class: 'form',
         novalidate: 'novalidate',
-        data-type: 'add-to-cart-form',
-        data-flow-form: '',
-        data-flow-product-form: ''
+        data-type: 'add-to-cart-form'
       -%}
         <input
           type="hidden"
@@ -77,7 +75,6 @@
             type="submit"
             name="add"
             class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
-            data-flow-submit
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == null

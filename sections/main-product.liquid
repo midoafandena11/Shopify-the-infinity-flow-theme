@@ -3,10 +3,6 @@
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
-  data-flow-card
-  data-flow-title="{{ product.title | escape }}"
-  data-flow-available="{{ product.available }}"
-  data-flow-multi="false"
   data-update-url="true"
   data-url="{{ product.url }}"
   {% if section.settings.image_zoom == 'hover' %}

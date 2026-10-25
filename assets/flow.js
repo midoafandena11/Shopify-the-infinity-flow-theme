@@ -91,8 +91,7 @@
       if (this.state || !e.isPrimary || e.button > 0) return;
       const card = e.target.closest?.('[data-flow-card]');
       if (!card || card.dataset.flowAvailable !== 'true') return;
-      if (e.target.closest('[data-flow-add], input, select, textarea, button, quick-add-modal, .fx-card__info, .product__info-wrapper, .product__info-container')) return;
-      if (card.matches('product-info') && !e.target.closest('.product__media-wrapper, .product__media')) return;
+      if (e.target.closest('[data-flow-add], input, select, textarea, button, quick-add-modal, .fx-card__info')) return;
 
       const touch = e.pointerType !== 'mouse';
       const s = (this.state = {
@@ -185,7 +184,7 @@
         this.fly(ghost, this.target).then(() => ghost.remove());
         this.choose(card);
       } else {
-        const m = card.querySelector('.fx-card__media, .card__media, .product__media-wrapper, .product__media') || card;
+        const m = card.querySelector('.fx-card__media, .card__media') || card;
         const r = m.getBoundingClientRect();
         this.fly(ghost, { x: r.left + r.width / 2, y: r.top + r.height / 2 }, 0.6, 260).then(() => ghost.remove());
       }
@@ -224,7 +223,7 @@
       const ghost = document.createElement('div');
       ghost.className = 'flow-ghost';
       ghost.setAttribute('aria-hidden', 'true');
-      const img = card.querySelector('.fx-card__img, .card__media img, .product__media img');
+      const img = card.querySelector('.fx-card__img, .card__media img');
       if (img) {
         const clone = document.createElement('img');
         clone.src = img.currentSrc || img.src;
@@ -399,7 +398,7 @@
             }, 350);
           }
         }, { threshold: 0.4 });
-        document.querySelectorAll('[data-flow-card]').forEach((el) => this._hintIO.observe(el.matches('product-info') ? (el.querySelector('.product__media-wrapper') || el) : el));
+        document.querySelectorAll('[data-flow-card]').forEach((el) => this._hintIO.observe(el));
       }, 1200);
     }
 
