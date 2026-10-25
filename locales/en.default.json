@@ -563,8 +563,8 @@
       "intro": "Free shipping on orders over {{ amount }}"
     },
     "feed": {
-      "hint_touch": "Press and hold a product, then drag it to the cart",
-      "hint_mouse": "Drag any product onto the cart",
+      "hint_touch": "Press and hold a product image, then drag it onto the cart to add it",
+      "hint_mouse": "Drag a product image onto the cart to add it",
       "grid_2": "Two columns",
       "grid_1": "One column",
       "view_all": "View all"

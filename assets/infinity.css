@@ -360,14 +360,14 @@ cart-drawer .drawer__inner { background-color: rgb(var(--color-background, 245, 
 
 /* bottom navigation: cream bar with the cart dock raised in the middle */
 @media screen and (max-width: 749px) {
-  .fx-nav { inset-inline: 0; inset-block-end: 0; display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px)); border-radius: 24px 24px 0 0; background: var(--fx-cream); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 -12px 30px -16px rgba(8, 58, 56, 0.45); }
+  .fx-nav { inset-inline: 0; inset-block-end: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: end; padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px)); border-radius: 24px 24px 0 0; background: radial-gradient(circle 42px at 50% 0, transparent 41px, var(--fx-cream) 42px); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 -12px 30px -16px rgba(8, 58, 56, 0.45); }
   .fx-nav a { min-width: 0; padding: 8px 2px; color: #5d7471; }
   .fx-nav a[aria-current='page'] { background: transparent; color: var(--fx-teal); }
   .fx-nav a[aria-current='page'] .fx-icon { stroke-width: 2.4; }
-  .fx-nav__gap { display: flex; justify-content: center; padding: 0 0 9px; color: #5d7471; font-size: 1.1rem; font-weight: 600; }
+  .fx-nav__gap { display: block; min-width: 0; height: 42px; }
   body.has-flow-nav { padding-block-end: 84px; }
   body.has-flow-nav flow-dock.flow-dock--nav { inset-inline: 0; margin-inline: auto; width: 64px; inset-block-end: calc(34px + env(safe-area-inset-bottom, 0px)); }
-  .flow-dock--nav .flow-dock__btn { width: 64px; height: 64px; box-shadow: 0 0 0 6px var(--fx-cream), 0 16px 28px -10px rgba(8, 58, 56, 0.75); }
+  .flow-dock--nav .flow-dock__btn { width: 64px; height: 64px; border-radius: 50%; box-shadow: 0 0 0 6px var(--fx-cream), 0 16px 28px -10px rgba(8, 58, 56, 0.75); }
   .flow-dock--nav .flow-dock__count { background: var(--fx-gold-grad); color: var(--fx-ink); }
   .flow-dock--nav .flow-hint, .flow-dock--nav .flow-toast, .flow-dock--nav .flow-dock__label { inset-block-end: calc(100% + 18px); inset-inline-end: 50%; transform: translate(50%, 8px); }
   [dir='rtl'] .flow-dock--nav .flow-hint, [dir='rtl'] .flow-dock--nav .flow-toast, [dir='rtl'] .flow-dock--nav .flow-dock__label { transform: translate(-50%, 8px); }
@@ -403,4 +403,13 @@ flow-dock.is-hot .flow-dock__btn { box-shadow: 0 14px 40px -6px rgba(217, 188, 1
 @media screen and (max-width: 749px) {
   .product__info-container { padding: 18px; border-radius: 20px; }
   .product__media-wrapper .product__media { border-radius: 18px; }
+}
+
+/* NOVA mobile dock integration: the nav bar deliberately wraps around the circular cart. */
+@media screen and (max-width: 749px) {
+  .fx-nav { overflow: visible; }
+  .fx-nav__gap { pointer-events: none; }
+  body.has-flow-nav flow-dock.flow-dock--nav { z-index: 95; }
+  .flow-dock--nav .flow-dock__btn { background: var(--fx-grad); border: 0; }
+  .flow-dock--nav .flow-dock__icon svg { width: 27px; height: 27px; }
 }
