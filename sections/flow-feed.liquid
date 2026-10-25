@@ -1,0 +1,68 @@
+{%- assign fx_col = section.settings.collection -%}
+<section class="fx-sec page-width" {{ section.shopify_attributes }}>
+  <div class="fx-head">
+    <div>
+      {%- if section.settings.heading != blank -%}<h2 class="fx-title">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.subheading != blank -%}<p class="fx-sub">{{ section.settings.subheading }}</p>{%- endif -%}
+    </div>
+    {%- if section.settings.layout == 'grid' and section.settings.show_toggle -%}
+      <div class="fx-toggle" role="group" data-fx-toggle>
+        <button type="button" data-fx-view="2" aria-pressed="true" aria-label="{{ 'flow.feed.grid_2' | t }}">{%- render 'flow-icon', name: 'grid' -%}</button>
+        <button type="button" data-fx-view="1" aria-pressed="false" aria-label="{{ 'flow.feed.grid_1' | t }}">
+          <svg class="fx-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="4.5" width="15" height="15" rx="3.5"/></svg>
+        </button>
+      </div>
+    {%- elsif section.settings.link_label != blank and fx_col != blank -%}
+      <a class="fx-link" href="{{ fx_col.url }}">{{ section.settings.link_label }}</a>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_hint and settings.flow_enabled and section.settings.layout == 'grid' -%}
+    <p class="fx-hintline">
+      {%- render 'flow-icon', name: 'spark' -%}
+      <span class="fx-hint-t">{{ 'flow.feed.hint_touch' | t }}</span>
+      <span class="fx-hint-m">{{ 'flow.feed.hint_mouse' | t }}</span>
+    </p>
+  {%- endif -%}
+
+  <ul class="fx-feed fx-feed--{{ section.settings.layout }}" data-fx-feed role="list">
+    {%- if fx_col != blank and fx_col.products.size > 0 -%}
+      {%- for product in fx_col.products limit: section.settings.limit -%}
+        <li>
+          {%- render 'card-product',
+            card_product: product,
+            media_aspect_ratio: 'portrait',
+            image_shape: 'default',
+            show_secondary_image: true,
+            show_vendor: false,
+            show_rating: false,
+            lazy_load: forloop.index > 2,
+            section_id: section.id,
+            quick_add: 'none',
+            product_view_context: 'collection'
+          -%}
+        </li>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..4) -%}
+        <li><div class="fx-ph" aria-hidden="true">{%- render 'flow-icon', name: 'bag' -%}</div></li>
+      {%- endfor -%}
+    {%- endif -%}
+  </ul>
+</section>
+{% schema %}
+{
+  "name": "Infinity product feed",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Dynamic feed" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Continuous shopping flow" },
+    { "type": "select", "id": "layout", "label": "Layout", "default": "grid", "options": [ { "value": "grid", "label": "Staggered grid" }, { "value": "rail", "label": "Horizontal rail" } ] },
+    { "type": "range", "id": "limit", "min": 2, "max": 24, "step": 2, "label": "Products to show", "default": 8 },
+    { "type": "checkbox", "id": "show_toggle", "label": "Show one/two column switch", "default": true },
+    { "type": "checkbox", "id": "show_hint", "label": "Show the drag hint above the grid", "default": true },
+    { "type": "text", "id": "link_label", "label": "View all label (rail layout)", "default": "View all" }
+  ],
+  "presets": [ { "name": "Infinity product feed" } ]
+}
+{% endschema %}

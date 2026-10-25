@@ -1,75 +1,131 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "flow-hero",
+      "settings": {
+        "shade": 60,
+        "align": "start",
+        "show_demo": true,
+        "eyebrow": "Shopping without buttons",
+        "heading": "Drag it. Drop it. Done.",
+        "text": "Pick up anything you love and drop it into your cart. Shopping that flows.",
+        "button_label": "Start shopping",
+        "button2_label": "Browse categories"
+      }
+    },
+    "categories": {
+      "type": "flow-categories",
+      "settings": {
+        "heading": "Shop by category",
+        "placeholder_label": "Category"
+      }
+    },
+    "feed": {
+      "type": "flow-feed",
+      "settings": {
+        "collection": "all",
+        "heading": "Dynamic feed",
+        "subheading": "Continuous shopping flow",
+        "layout": "grid",
+        "limit": 8,
+        "show_toggle": true,
+        "show_hint": true
+      }
+    },
+    "banners": {
+      "type": "flow-promo",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "b1": {
+          "type": "tile",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "art": "a",
+            "tag": "New",
+            "heading": "Fresh arrivals",
+            "text": "Just landed. Drag your favorites to the cart.",
+            "label": "Shop now"
           }
         },
-        "button": {
-          "type": "buttons",
+        "b2": {
+          "type": "tile",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "art": "b",
+            "tag": "Limited",
+            "heading": "Best sellers",
+            "text": "What everyone is dropping in their cart.",
+            "label": "Discover"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "b1",
+        "b2"
       ],
+      "settings": {}
+    },
+    "rail": {
+      "type": "flow-feed",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "collection": "all",
+        "heading": "Picked for you",
+        "subheading": "",
+        "layout": "rail",
+        "limit": 10,
+        "show_toggle": false,
+        "show_hint": false,
+        "link_label": "View all"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
-      }
+    "trust": {
+      "type": "flow-trust",
+      "blocks": {
+        "t1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast delivery",
+            "text": "Ships in 24 hours"
+          }
+        },
+        "t2": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "title": "Easy returns",
+            "text": "14 days, no questions"
+          }
+        },
+        "t3": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "Secure payment",
+            "text": "Protected checkout"
+          }
+        },
+        "t4": {
+          "type": "item",
+          "settings": {
+            "icon": "heart",
+            "title": "Loved by many",
+            "text": "Thousands of happy customers"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {}
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "categories",
+    "feed",
+    "banners",
+    "rail",
+    "trust"
   ]
 }

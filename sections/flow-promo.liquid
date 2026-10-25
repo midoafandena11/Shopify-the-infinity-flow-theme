@@ -1,0 +1,54 @@
+{%- if section.blocks.size > 0 -%}
+<section class="fx-sec page-width" {{ section.shopify_attributes }}>
+  <div class="fx-promo fx-promo--{{ section.blocks.size }}">
+    {%- for block in section.blocks -%}
+      {%- assign fx_art = 'flow-banner-a.svg' -%}
+      {%- if block.settings.art == 'b' -%}{%- assign fx_art = 'flow-banner-b.svg' -%}{%- endif -%}
+      <a class="fx-tile" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'fx-tile__img', loading: 'lazy', widths: '500, 800, 1200', alt: '' }}
+        {%- else -%}
+          <img class="fx-tile__img" src="{{ fx_art | asset_url }}" alt="" width="800" height="600" loading="lazy">
+        {%- endif -%}
+        <span class="fx-tile__shade"></span>
+        <span class="fx-tile__body">
+          {%- if block.settings.tag != blank -%}<span class="fx-eyebrow">{{ block.settings.tag }}</span>{%- endif -%}
+          <span class="fx-tile__title">{{ block.settings.heading }}</span>
+          {%- if block.settings.text != blank -%}<span class="fx-tile__text">{{ block.settings.text }}</span>{%- endif -%}
+          {%- if block.settings.label != blank -%}<span class="fx-tile__cta">{{ block.settings.label }}{%- render 'flow-icon', name: 'arrow' -%}</span>{%- endif -%}
+        </span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Infinity banners",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Banner",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Leave empty to use the built-in artwork." },
+        { "type": "select", "id": "art", "label": "Built-in artwork", "default": "a", "options": [ { "value": "a", "label": "Aurora" }, { "value": "b", "label": "Midnight" } ] },
+        { "type": "text", "id": "tag", "label": "Small label", "default": "New" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Fresh arrivals" },
+        { "type": "text", "id": "text", "label": "Text" },
+        { "type": "text", "id": "label", "label": "Button label", "default": "Shop now" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Infinity banners",
+      "blocks": [
+        { "type": "tile", "settings": { "art": "a", "tag": "New", "heading": "Fresh arrivals", "text": "Just landed. Drag your favorites to the cart.", "label": "Shop now" } },
+        { "type": "tile", "settings": { "art": "b", "tag": "Limited", "heading": "Best sellers", "text": "What everyone is dropping in their cart.", "label": "Discover" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

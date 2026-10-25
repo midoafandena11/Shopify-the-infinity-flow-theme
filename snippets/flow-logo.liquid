@@ -1,0 +1,12 @@
+{%- comment -%} Default Infinity Flow logo (symbol + shop name). Used when no logo image is set. {%- endcomment -%}
+<span class="fx-logo">
+  <svg class="fx-logo__mark" viewBox="0 0 48 28" fill="none" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="fxLogoG{{ section.id | default: 'x' }}" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#14B8C4"/><stop offset=".55" stop-color="#8B5CF6"/><stop offset="1" stop-color="#F472B6"/>
+      </linearGradient>
+    </defs>
+    <path d="M24 14C29 5 43 5 43 14C43 23 29 23 24 14C19 5 5 5 5 14C5 23 19 23 24 14Z" stroke="url(#fxLogoG{{ section.id | default: 'x' }})" stroke-width="4.2" stroke-linecap="round"/>
+  </svg>
+  <span class="fx-logo__text">{{ shop.name }}</span>
+</span>

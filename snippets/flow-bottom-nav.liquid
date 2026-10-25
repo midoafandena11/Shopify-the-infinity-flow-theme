@@ -1,0 +1,16 @@
+{%- if settings.flow_bottom_nav -%}
+  <nav class="fx-nav" aria-label="{{ 'flow.nav.label' | t }}">
+    <a href="{{ routes.root_url }}"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>
+      {%- render 'flow-icon', name: 'home' -%}<span>{{ 'flow.nav.home' | t }}</span>
+    </a>
+    <a href="{{ routes.search_url }}"{% if request.page_type == 'search' %} aria-current="page"{% endif %}>
+      {%- render 'flow-icon', name: 'search' -%}<span>{{ 'flow.nav.search' | t }}</span>
+    </a>
+    <a href="{{ routes.collections_url }}"{% if request.page_type == 'collection' or request.page_type == 'list-collections' %} aria-current="page"{% endif %}>
+      {%- render 'flow-icon', name: 'grid' -%}<span>{{ 'flow.nav.shop' | t }}</span>
+    </a>
+    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"{% if request.page_type contains 'customers' %} aria-current="page"{% endif %}>
+      {%- render 'flow-icon', name: 'user' -%}<span>{{ 'flow.nav.account' | t }}</span>
+    </a>
+  </nav>
+{%- endif -%}

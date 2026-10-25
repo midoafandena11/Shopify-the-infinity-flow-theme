@@ -1,0 +1,26 @@
+{%- liquid
+  assign fx_goal = settings.flow_free_ship | default: 0 | times: 100
+-%}
+{%- if fx_goal > 0 and cart.item_count > 0 -%}
+  {%- liquid
+    assign fx_left = fx_goal | minus: cart.total_price
+    assign fx_amount = fx_left | money
+    assign fx_pct = cart.total_price | times: 100 | divided_by: fx_goal
+    if fx_pct > 100
+      assign fx_pct = 100
+    endif
+  -%}
+  <div class="fx-ship{% if fx_left <= 0 %} is-done{% endif %}">
+    <p class="fx-ship__text">
+      {%- render 'flow-icon', name: 'truck' -%}
+      <span>
+        {%- if fx_left <= 0 -%}
+          {{ 'flow.ship.unlocked' | t }}
+        {%- else -%}
+          {{ 'flow.ship.add_more' | t: amount: fx_amount }}
+        {%- endif -%}
+      </span>
+    </p>
+    <div class="fx-ship__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ fx_pct }}"><span style="--p: {{ fx_pct }}%"></span></div>
+  </div>
+{%- endif -%}

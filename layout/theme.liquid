@@ -63,6 +63,7 @@
     {%- if settings.flow_enabled -%}
       <script src="{{ 'flow.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    <script src="{{ 'infinity.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'cart-disclosure-tooltip.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
@@ -290,6 +291,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'infinity.css' | asset_url | stylesheet_tag }}
     {%- if settings.flow_enabled -%}
       <style>
         :root {
@@ -342,7 +344,7 @@
     </script>
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="gradient{% if settings.flow_bottom_nav %} has-flow-nav{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -366,6 +368,7 @@
     {% sections 'footer-group' %}
 
     {%- render 'flow-dock' -%}
+    {%- render 'flow-bottom-nav' -%}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>

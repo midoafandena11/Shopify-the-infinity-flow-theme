@@ -1,0 +1,57 @@
+<section class="fx-hero page-width" {{ section.shopify_attributes }}>
+  <div class="fx-hero__card fx-hero__card--{{ section.settings.align }}">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 1600 | image_tag: class: 'fx-hero__img', loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 1200px) 1200px, 100vw', widths: '600, 900, 1200, 1600', alt: section.settings.image.alt | default: '' }}
+    {%- else -%}
+      <img class="fx-hero__img" src="{{ 'flow-hero-art.svg' | asset_url }}" alt="" width="800" height="1000" loading="eager">
+    {%- endif -%}
+    <div class="fx-hero__shade" style="--fx-shade: {{ section.settings.shade | divided_by: 100.0 }}"></div>
+
+    {%- if section.settings.show_demo and settings.flow_enabled -%}
+      <div class="fx-demo" aria-hidden="true">
+        <div class="fx-demo__track">
+          <span class="fx-demo__tile">{%- render 'flow-icon', name: 'bag' -%}</span>
+          <span class="fx-demo__dock">{%- render 'flow-icon', name: 'bag' -%}</span>
+        </div>
+        <span class="fx-demo__label">{{ 'flow.hero.demo' | t }}</span>
+      </div>
+    {%- endif -%}
+
+    <div class="fx-hero__body">
+      {%- if section.settings.eyebrow != blank -%}<p class="fx-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="fx-hero__title">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}<p class="fx-hero__text">{{ section.settings.text }}</p>{%- endif -%}
+      <div class="fx-hero__cta">
+        {%- if section.settings.button_label != blank -%}
+          <a class="fx-btn fx-btn--primary" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">
+            <span>{{ section.settings.button_label }}</span>{%- render 'flow-icon', name: 'arrow' -%}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button2_label != blank -%}
+          <a class="fx-btn fx-btn--ghost" href="{{ section.settings.button2_link | default: routes.collections_url }}">{{ section.settings.button2_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Infinity hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image", "info": "Leave empty to use the built-in Infinity artwork." },
+    { "type": "range", "id": "shade", "min": 0, "max": 90, "step": 5, "unit": "%", "label": "Dark overlay", "default": 60 },
+    { "type": "select", "id": "align", "label": "Text alignment", "default": "start", "options": [ { "value": "start", "label": "Start" }, { "value": "center", "label": "Center" } ] },
+    { "type": "checkbox", "id": "show_demo", "label": "Show the drag-to-cart animation", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Shopping without buttons" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Drag it. Drop it. Done." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Pick up anything you love and drop it into your cart. Shopping that flows." },
+    { "type": "text", "id": "button_label", "label": "Primary button", "default": "Start shopping" },
+    { "type": "url", "id": "button_link", "label": "Primary link" },
+    { "type": "text", "id": "button2_label", "label": "Secondary button", "default": "Browse categories" },
+    { "type": "url", "id": "button2_link", "label": "Secondary link" }
+  ],
+  "presets": [ { "name": "Infinity hero" } ]
+}
+{% endschema %}

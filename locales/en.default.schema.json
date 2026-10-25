@@ -419,6 +419,13 @@
         },
         "flow_ink": {
           "label": "Hint and toast color"
+        },
+        "flow_bottom_nav": {
+          "label": "Show bottom navigation bar on mobile"
+        },
+        "flow_free_ship": {
+          "label": "Free shipping threshold",
+          "info": "Amount in store currency for the cart progress bar. Use 0 to hide it."
         }
       }
     }

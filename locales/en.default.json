@@ -548,6 +548,27 @@
     "toast": {
       "added": "[title] added to cart",
       "error": "Couldn't add to cart. Please try again."
+    },
+    "nav": {
+      "home": "Home",
+      "search": "Search",
+      "shop": "Shop",
+      "account": "Account",
+      "label": "Main navigation"
+    },
+    "ship": {
+      "add_more": "Add {{ amount }} more for free shipping",
+      "unlocked": "You unlocked free shipping"
+    },
+    "feed": {
+      "hint_touch": "Press and hold a product, then drag it to the cart",
+      "hint_mouse": "Drag any product onto the cart",
+      "grid_2": "Two columns",
+      "grid_1": "One column",
+      "view_all": "View all"
+    },
+    "hero": {
+      "demo": "Drag it. Drop it. Done."
     }
   }
 }

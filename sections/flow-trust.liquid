@@ -1,0 +1,43 @@
+{%- if section.blocks.size > 0 -%}
+<section class="fx-sec page-width" {{ section.shopify_attributes }}>
+  <ul class="fx-trust" role="list">
+    {%- for block in section.blocks -%}
+      <li class="fx-trust__i" {{ block.shopify_attributes }}>
+        <span class="fx-trust__ic">{%- render 'flow-icon', name: block.settings.icon -%}</span>
+        <span>
+          <strong>{{ block.settings.title }}</strong>
+          {%- if block.settings.text != blank -%}<small>{{ block.settings.text }}</small>{%- endif -%}
+        </span>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Infinity benefits",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Benefit",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "truck", "options": [ { "value": "truck", "label": "Delivery" }, { "value": "return", "label": "Returns" }, { "value": "shield", "label": "Secure" }, { "value": "heart", "label": "Heart" }, { "value": "spark", "label": "Spark" }, { "value": "bag", "label": "Bag" } ] },
+        { "type": "text", "id": "title", "label": "Title", "default": "Fast delivery" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Ships in 24 hours" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Infinity benefits",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "truck", "title": "Fast delivery", "text": "Ships in 24 hours" } },
+        { "type": "item", "settings": { "icon": "return", "title": "Easy returns", "text": "14 days, no questions" } },
+        { "type": "item", "settings": { "icon": "shield", "title": "Secure payment", "text": "Protected checkout" } },
+        { "type": "item", "settings": { "icon": "heart", "title": "Loved by many", "text": "Thousands of happy customers" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
