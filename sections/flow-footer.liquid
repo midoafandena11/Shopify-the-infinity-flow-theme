@@ -1,0 +1,86 @@
+{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+<footer class="fx-foot color-{{ section.settings.color_scheme }} gradient" {{ section.shopify_attributes }}>
+  <div class="fx-foot__glow" aria-hidden="true"></div>
+  <div class="page-width fx-foot__in">
+    {%- if section.settings.show_newsletter -%}
+      <div class="fx-join">
+        <div class="fx-join__copy">
+          <h2 class="fx-join__title">{{ section.settings.heading }}</h2>
+          {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+        </div>
+        {%- form 'customer', id: 'FxNewsletter', class: 'fx-join__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label class="visually-hidden" for="FxJoinEmail">{{ 'newsletter.label' | t }}</label>
+          <div class="fx-join__field">
+            <input id="FxJoinEmail" type="email" name="contact[email]" autocomplete="email" required placeholder="{{ 'newsletter.label' | t }}" value="{{ form.email }}">
+            <button type="submit">{{ 'newsletter.button_label' | t }}</button>
+          </div>
+          {%- if form.posted_successfully? -%}
+            <p class="fx-join__ok" role="status">{{ 'newsletter.success' | t }}</p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <p class="fx-join__err" role="alert">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+
+    <div class="fx-foot__grid">
+      <div class="fx-foot__brand">
+        {%- render 'flow-logo' -%}
+        {%- if section.settings.about != blank -%}<p>{{ section.settings.about }}</p>{%- endif -%}
+        {%- if section.settings.show_social -%}{%- render 'social-icons' -%}{%- endif -%}
+      </div>
+      {%- for i in (1..2) -%}
+        {%- liquid
+          if i == 1
+            assign fx_menu = section.settings.menu_1
+            assign fx_menu_title = section.settings.menu_1_title
+          else
+            assign fx_menu = section.settings.menu_2
+            assign fx_menu_title = section.settings.menu_2_title
+          endif
+        -%}
+        {%- if fx_menu != blank and fx_menu.links.size > 0 -%}
+          <nav class="fx-foot__col" aria-label="{{ fx_menu_title | escape }}">
+            <h2 class="fx-foot__h">{{ fx_menu_title }}</h2>
+            <ul role="list">
+              {%- for link in fx_menu.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}
+            </ul>
+          </nav>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="fx-foot__bar">
+      <small>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</small>
+      {%- if section.settings.show_payment and shop.enabled_payment_types.size > 0 -%}
+        <ul class="list-payment" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li class="list-payment__item">{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+{% schema %}
+{
+  "name": "Infinity footer",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show email sign-up", "default": true },
+    { "type": "text", "id": "heading", "label": "Sign-up heading", "default": "Join the flow" },
+    { "type": "text", "id": "text", "label": "Sign-up text", "default": "Early drops and offers, straight to your inbox." },
+    { "type": "textarea", "id": "about", "label": "About text", "default": "A store built to flow. Drag what you love into your cart." },
+    { "type": "link_list", "id": "menu_1", "label": "Menu 1", "default": "footer" },
+    { "type": "text", "id": "menu_1_title", "label": "Menu 1 title", "default": "Quick links" },
+    { "type": "link_list", "id": "menu_2", "label": "Menu 2", "default": "main-menu" },
+    { "type": "text", "id": "menu_2_title", "label": "Menu 2 title", "default": "Shop" },
+    { "type": "checkbox", "id": "show_social", "label": "Show social icons", "default": true },
+    { "type": "checkbox", "id": "show_payment", "label": "Show payment icons", "default": true }
+  ],
+  "presets": [ { "name": "Infinity footer" } ]
+}
+{% endschema %}

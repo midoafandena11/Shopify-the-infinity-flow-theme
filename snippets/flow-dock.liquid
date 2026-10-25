@@ -16,7 +16,7 @@
   </script>
 
   <flow-dock
-    class="flow-dock flow-dock--{{ settings.flow_dock_position }}"
+    class="flow-dock flow-dock--{{ settings.flow_dock_position }}{% if settings.flow_bottom_nav %} flow-dock--nav{% endif %}"
     data-after-drop="{{ settings.flow_after_drop }}"
     data-haptics="{{ settings.flow_haptics }}"
     data-hint="{{ settings.flow_show_hint }}"

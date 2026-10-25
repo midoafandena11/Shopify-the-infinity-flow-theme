@@ -1518,19 +1518,19 @@
       {
         "type": "color",
         "id": "flow_accent_1",
-        "default": "#14B8C4",
+        "default": "#2BA79F",
         "label": "t:settings_schema.flow.settings.flow_accent_1.label"
       },
       {
         "type": "color",
         "id": "flow_accent_2",
-        "default": "#8B5CF6",
+        "default": "#0E5753",
         "label": "t:settings_schema.flow.settings.flow_accent_2.label"
       },
       {
         "type": "color",
         "id": "flow_ink",
-        "default": "#0B0D12",
+        "default": "#0B2E2C",
         "label": "t:settings_schema.flow.settings.flow_ink.label"
       },
       {

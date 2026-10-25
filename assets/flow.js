@@ -79,7 +79,7 @@
       this.sheet.querySelector('.flow-sheet__add').addEventListener('click', () => this.confirmSheet());
       this.hintEl.querySelector('.flow-hint__x').addEventListener('click', () => this.hideHint(true));
 
-      if (typeof subscribe === 'function' && window.PUB_SUB_EVENTS) {
+      if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
         subscribe(PUB_SUB_EVENTS.cartUpdate, () => this.refreshCount());
       }
       this.showHintSoon();
@@ -91,7 +91,7 @@
       if (this.state || !e.isPrimary || e.button > 0) return;
       const card = e.target.closest?.('[data-flow-card]');
       if (!card || card.dataset.flowAvailable !== 'true') return;
-      if (e.target.closest('[data-flow-add], input, select, textarea, button, quick-add-modal')) return;
+      if (e.target.closest('[data-flow-add], input, select, textarea, button, quick-add-modal, .fx-card__info')) return;
 
       const touch = e.pointerType !== 'mouse';
       const s = (this.state = {
@@ -184,7 +184,7 @@
         this.fly(ghost, this.target).then(() => ghost.remove());
         this.choose(card);
       } else {
-        const m = card.querySelector('.card__media') || card;
+        const m = card.querySelector('.fx-card__media, .card__media') || card;
         const r = m.getBoundingClientRect();
         this.fly(ghost, { x: r.left + r.width / 2, y: r.top + r.height / 2 }, 0.6, 260).then(() => ghost.remove());
       }
@@ -208,19 +208,22 @@
     }
 
     suppressClick() {
+      // swallow only the *native* click that follows a drag; our own programmatic submit click must pass
       const stop = (ev) => {
+        if (!ev.isTrusted) return;
         ev.preventDefault();
         ev.stopPropagation();
+        window.removeEventListener('click', stop, true);
       };
-      window.addEventListener('click', stop, { capture: true, once: true });
-      setTimeout(() => window.removeEventListener('click', stop, { capture: true }), 120);
+      window.addEventListener('click', stop, true);
+      setTimeout(() => window.removeEventListener('click', stop, true), 400);
     }
 
     makeGhost(card) {
       const ghost = document.createElement('div');
       ghost.className = 'flow-ghost';
       ghost.setAttribute('aria-hidden', 'true');
-      const img = card.querySelector('.card__media img');
+      const img = card.querySelector('.fx-card__img, .card__media img');
       if (img) {
         const clone = document.createElement('img');
         clone.src = img.currentSrc || img.src;
@@ -305,6 +308,7 @@
       } else if (cart) {
         cart.renderContents(json);
       }
+      this.refreshCount();
       if (this._viaDrag) {
         store.set('flow_learned', '1'); // the shopper has got it: hint never shows again
         this._viaDrag = false;
@@ -377,14 +381,30 @@
       this._hintTimer = setTimeout(() => {
         const coarse = window.matchMedia('(pointer: coarse)').matches;
         this.hintEl.querySelector('span').textContent = coarse ? str().hint_touch : str().hint_mouse;
-        this.hintEl.hidden = false;
-        this.classList.add('has-hint');
-        requestAnimationFrame(() => this.hintEl.classList.add('is-visible'));
+        // show the hint only while a draggable product is actually on screen
+        const seen = new Set();
+        this._hintIO = new IntersectionObserver((entries) => {
+          entries.forEach((en) => (en.isIntersecting ? seen.add(en.target) : seen.delete(en.target)));
+          const show = seen.size > 0 && !this.state?.active;
+          if (show) {
+            this.hintEl.hidden = false;
+            this.classList.add('has-hint');
+            requestAnimationFrame(() => this.hintEl.classList.add('is-visible'));
+          } else {
+            this.hintEl.classList.remove('is-visible');
+            this.classList.remove('has-hint');
+            setTimeout(() => {
+              if (!this.hintEl.classList.contains('is-visible')) this.hintEl.hidden = true;
+            }, 350);
+          }
+        }, { threshold: 0.4 });
+        document.querySelectorAll('[data-flow-card]').forEach((el) => this._hintIO.observe(el));
       }, 1200);
     }
 
     hideHint(closedByUser = false) {
       clearTimeout(this._hintTimer);
+      if (closedByUser || this._viaDrag || this.state?.active) this._hintIO?.disconnect();
       this.hintEl.classList.remove('is-visible');
       this.hintEl.hidden = true;
       this.classList.remove('has-hint');

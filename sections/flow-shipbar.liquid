@@ -1,0 +1,51 @@
+{%- liquid
+  assign fx_goal = settings.flow_free_ship | default: 0 | times: 100
+-%}
+{%- if fx_goal > 0 -%}
+  {%- liquid
+    assign fx_pct = cart.total_price | times: 100 | divided_by: fx_goal
+    if fx_pct > 100
+      assign fx_pct = 100
+    endif
+    assign fx_left = fx_goal | minus: cart.total_price
+    assign fx_goal_money = fx_goal | money_without_trailing_zeros
+    assign fx_left_money = fx_left | money_without_trailing_zeros
+  -%}
+  <div
+    class="fx-shipbar{% if fx_left <= 0 %} is-done{% endif %}"
+    data-fx-shipbar
+    data-goal="{{ fx_goal }}"
+    data-t-intro="{{ 'flow.ship.intro' | t: amount: '[amount]' | escape }}"
+    data-t-more="{{ 'flow.ship.add_more' | t: amount: '[amount]' | escape }}"
+    data-t-done="{{ 'flow.ship.unlocked' | t | escape }}"
+    {{ section.shopify_attributes }}
+  >
+    <div class="page-width fx-shipbar__in">
+      <p class="fx-shipbar__t">
+        {%- render 'flow-icon', name: 'truck' -%}
+        <span data-fx-shipbar-text>
+          {%- if fx_left <= 0 -%}
+            {{ 'flow.ship.unlocked' | t }}
+          {%- elsif cart.item_count == 0 -%}
+            {{ 'flow.ship.intro' | t: amount: fx_goal_money }}
+          {%- else -%}
+            {{ 'flow.ship.add_more' | t: amount: fx_left_money }}
+          {%- endif -%}
+        </span>
+      </p>
+      <div class="fx-shipbar__row">
+        <span class="fx-shipbar__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ fx_pct }}"><i style="--p: {{ fx_pct }}%"></i></span>
+        <span class="fx-shipbar__pct" data-fx-shipbar-pct>{{ fx_pct }}%</span>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Infinity shipping bar",
+  "settings": [
+    { "type": "paragraph", "content": "Uses the free shipping amount set in Theme settings > Infinity Flow." }
+  ],
+  "presets": [ { "name": "Infinity shipping bar" } ]
+}
+{% endschema %}

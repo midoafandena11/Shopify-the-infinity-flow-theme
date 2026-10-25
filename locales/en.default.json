@@ -537,8 +537,8 @@
       "add_aria": "Add {{ product_name }} to cart"
     },
     "hint": {
-      "mouse": "Drag a product and drop it on the cart to add it",
-      "touch": "Press and hold a product, then drag it to the cart to add it"
+      "mouse": "Drag a product here",
+      "touch": "Hold & drag a product here"
     },
     "sheet": {
       "add": "Add to cart",
@@ -554,11 +554,13 @@
       "search": "Search",
       "shop": "Shop",
       "account": "Account",
-      "label": "Main navigation"
+      "label": "Main navigation",
+      "cart": "Cart"
     },
     "ship": {
       "add_more": "Add {{ amount }} more for free shipping",
-      "unlocked": "You unlocked free shipping"
+      "unlocked": "You unlocked free shipping",
+      "intro": "Free shipping on orders over {{ amount }}"
     },
     "feed": {
       "hint_touch": "Press and hold a product, then drag it to the cart",
@@ -569,6 +571,9 @@
     },
     "hero": {
       "demo": "Drag it. Drop it. Done."
+    },
+    "lang": {
+      "label": "Language"
     }
   }
 }

@@ -3,7 +3,7 @@
     "hero": {
       "type": "flow-hero",
       "settings": {
-        "shade": 60,
+        "shade": 45,
         "align": "start",
         "show_demo": true,
         "eyebrow": "Shopping without buttons",
@@ -16,7 +16,7 @@
     "categories": {
       "type": "flow-categories",
       "settings": {
-        "heading": "Shop by category",
+        "heading": "",
         "placeholder_label": "Category"
       }
     },
@@ -121,8 +121,8 @@
     }
   },
   "order": [
-    "hero",
     "categories",
+    "hero",
     "feed",
     "banners",
     "rail",

@@ -225,102 +225,74 @@ body.overflow-hidden .flow-dock__label {
   pointer-events: none;
 }
 
-/* ---------- hint bubble: tells shoppers to drag ---------- */
+/* ---------- hint: compact capsule above the cart ---------- */
 .flow-hint {
   position: absolute;
-  inset-block-end: 4px;
-  inset-inline-end: calc(100% + 18px);
+  inset-block-end: calc(100% + 16px);
+  inset-inline-end: 0;
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
   width: max-content;
-  max-width: min(250px, calc(100vw - 120px));
-  padding: 12px 10px 12px 14px;
-  border-radius: 16px;
+  max-width: min(280px, calc(100vw - 32px));
+  padding: 9px 8px 9px 14px;
+  border-radius: 999px;
   background: var(--flow-ink);
   color: #fff;
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
   opacity: 0;
-  transform: translateX(10px) scale(0.96);
+  transform: translateY(8px) scale(0.96);
   transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 14px 30px -12px rgba(11, 13, 18, 0.6);
 }
-.flow-hint[hidden] {
-  display: none;
-}
-.flow-hint.is-visible {
-  opacity: 1;
-  transform: none;
-}
+[dir='rtl'] .flow-hint { padding: 9px 14px 9px 8px; }
+.flow-hint[hidden] { display: none; }
+.flow-hint.is-visible { opacity: 1; transform: none; }
 .flow-hint::after {
   content: '';
   position: absolute;
-  inset-block-end: 22px;
-  inset-inline-end: -6px;
+  inset-block-end: -5px;
+  inset-inline-end: 24px;
   width: 12px;
   height: 12px;
   background: var(--flow-ink);
-  transform: rotate(45deg);
   border-radius: 2px;
+  transform: rotate(45deg);
 }
 .flow-hint__arrow {
   flex: none;
-  width: 20px;
-  height: 20px;
-  margin-block-start: 1px;
+  width: 18px;
+  height: 18px;
   color: var(--flow-a);
-  animation: flowNudge 1.4s ease-in-out infinite;
+  transform: rotate(90deg);
+  animation: flowNudgeDown 1.2s ease-in-out infinite;
 }
 .flow-hint__x {
   flex: none;
-  width: 24px;
-  height: 24px;
-  margin: -4px 0 0;
+  width: 22px;
+  height: 22px;
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 18px;
-  line-height: 24px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  line-height: 22px;
   cursor: pointer;
 }
-.flow-hint__x:hover {
-  color: #fff;
-}
-[dir='rtl'] .flow-hint__arrow {
-  transform: scaleX(-1);
-  animation-name: flowNudgeRtl;
-}
-.flow-dock--bottom-start .flow-hint {
-  inset-inline-end: auto;
-  inset-inline-start: calc(100% + 18px);
-}
-.flow-dock--bottom-start .flow-hint::after {
-  inset-inline-end: auto;
-  inset-inline-start: -6px;
-}
-.flow-dock--bottom-center .flow-hint {
-  inset-block-end: calc(100% + 18px);
-  inset-inline-end: 50%;
-  transform: translate(50%, 10px) scale(0.96);
-}
-[dir='rtl'] .flow-dock--bottom-center .flow-hint {
-  transform: translate(-50%, 10px) scale(0.96);
-}
-.flow-dock--bottom-center .flow-hint.is-visible {
-  transform: translate(50%, 0);
-}
-[dir='rtl'] .flow-dock--bottom-center .flow-hint.is-visible {
-  transform: translate(-50%, 0);
-}
-.flow-dock--bottom-center .flow-hint::after {
-  inset-block-end: -6px;
-  inset-inline-end: calc(50% - 6px);
-}
-flow-dock.has-hint .flow-dock__btn {
-  animation: flowWiggle 4s ease-in-out 1s infinite;
-}
+.flow-hint__x:hover { color: #fff; background: rgba(255, 255, 255, 0.22); }
+.flow-dock--bottom-start .flow-hint { inset-inline-end: auto; inset-inline-start: 0; }
+.flow-dock--bottom-start .flow-hint::after { inset-inline-end: auto; inset-inline-start: 24px; }
+.flow-dock--bottom-center .flow-hint { inset-inline-end: auto; inset-inline-start: 50%; transform: translate(-50%, 8px) scale(0.96); }
+[dir='rtl'] .flow-dock--bottom-center .flow-hint { transform: translate(50%, 8px) scale(0.96); }
+.flow-dock--bottom-center .flow-hint.is-visible { transform: translate(-50%, 0); }
+[dir='rtl'] .flow-dock--bottom-center .flow-hint.is-visible { transform: translate(50%, 0); }
+.flow-dock--bottom-center .flow-hint::after { inset-inline-end: calc(50% - 6px); }
+flow-dock.has-hint .flow-dock__btn { animation: flowWiggle 4s ease-in-out 1s infinite; }
+@keyframes flowNudgeDown { 50% { transform: translateY(4px) rotate(90deg); } }
 
 /* ---------- toast ---------- */
 .flow-toast {
@@ -537,16 +509,7 @@ html[dir='rtl'] .h3 {
     transform: rotate(var(--a)) translateY(-64px) scale(0.3);
   }
 }
-@keyframes flowNudge {
-  50% {
-    transform: translateX(5px);
-  }
-}
-@keyframes flowNudgeRtl {
-  50% {
-    transform: scaleX(-1) translateX(5px);
-  }
-}
+
 @keyframes flowWiggle {
   0%,
   88%,

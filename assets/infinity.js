@@ -31,3 +31,44 @@
   else apply();
   document.addEventListener('shopify:section:load', apply);
 })();
+
+/* Free-shipping bar in the header: keep it in sync with the cart. */
+(() => {
+  const bar = () => document.querySelector('[data-fx-shipbar]');
+  const money = (cents) => {
+    const v = cents / 100;
+    try {
+      return new Intl.NumberFormat(document.documentElement.lang || undefined, {
+        style: 'currency',
+        currency: (window.Shopify && Shopify.currency && Shopify.currency.active) || 'USD',
+        maximumFractionDigits: v % 1 ? 2 : 0,
+      }).format(v);
+    } catch (e) {
+      return String(v);
+    }
+  };
+  const update = async () => {
+    const el = bar();
+    if (!el) return;
+    try {
+      const res = await fetch(`${(window.routes && routes.cart_url) || '/cart'}.js`);
+      const cart = await res.json();
+      const goal = Number(el.dataset.goal);
+      const left = goal - cart.total_price;
+      const pct = Math.max(0, Math.min(100, Math.floor((cart.total_price * 100) / goal)));
+      const text = el.querySelector('[data-fx-shipbar-text]');
+      if (left <= 0) text.textContent = el.dataset.tDone;
+      else if (cart.item_count === 0) text.textContent = el.dataset.tIntro.replace('[amount]', money(goal));
+      else text.textContent = el.dataset.tMore.replace('[amount]', money(left));
+      el.classList.toggle('is-done', left <= 0);
+      el.querySelector('.fx-shipbar__bar i').style.setProperty('--p', `${pct}%`);
+      el.querySelector('.fx-shipbar__bar').setAttribute('aria-valuenow', pct);
+      el.querySelector('[data-fx-shipbar-pct]').textContent = `${pct}%`;
+    } catch (e) {}
+  };
+  const hook = () => {
+    if (typeof subscribe === 'function' && window.PUB_SUB_EVENTS) subscribe(PUB_SUB_EVENTS.cartUpdate, update);
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hook);
+  else hook();
+})();

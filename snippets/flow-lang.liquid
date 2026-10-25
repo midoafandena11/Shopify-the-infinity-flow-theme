@@ -1,0 +1,10 @@
+{%- if localization.available_languages.size > 1 -%}
+  {%- form 'localization', id: 'FlowLang', class: 'fx-lang' -%}
+    <span class="visually-hidden">{{ 'flow.lang.label' | t }}</span>
+    {%- for language in localization.available_languages -%}
+      <button type="submit" name="language_code" value="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %}>
+        {{- language.iso_code | split: '-' | first | upcase -}}
+      </button>
+    {%- endfor -%}
+  {%- endform -%}
+{%- endif -%}

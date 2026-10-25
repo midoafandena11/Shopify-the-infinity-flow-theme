@@ -6,6 +6,7 @@
     <a href="{{ routes.search_url }}"{% if request.page_type == 'search' %} aria-current="page"{% endif %}>
       {%- render 'flow-icon', name: 'search' -%}<span>{{ 'flow.nav.search' | t }}</span>
     </a>
+    <span class="fx-nav__gap" aria-hidden="true">{{ 'flow.nav.cart' | t }}</span>
     <a href="{{ routes.collections_url }}"{% if request.page_type == 'collection' or request.page_type == 'list-collections' %} aria-current="page"{% endif %}>
       {%- render 'flow-icon', name: 'grid' -%}<span>{{ 'flow.nav.shop' | t }}</span>
     </a>
