@@ -382,3 +382,25 @@ cart-drawer .drawer__inner { background-color: rgb(var(--color-background, 245, 
 flow-dock.is-hot .flow-dock__btn { box-shadow: 0 14px 40px -6px rgba(217, 188, 126, 0.85), inset 0 0 0 2px var(--fx-gold-l); }
 .flow-pill[aria-pressed='true'] { background: var(--fx-grad); }
 .flow-hint__arrow { color: var(--fx-gold); }
+
+
+/* Product detail page: cleaner modern storefront treatment */
+.product__info-container {
+  padding: clamp(18px, 3vw, 32px);
+  border: 1px solid rgba(20,184,196,.14);
+  border-radius: 24px;
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 18px 45px -32px rgba(11,13,18,.45);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+.product__media-wrapper .product__media, .product__media-item .global-media-settings {
+  border-radius: 22px; overflow: hidden;
+}
+.product__title h1 { letter-spacing: -.025em; line-height: 1.12; }
+.product__info-container .price { font-size: 1.35em; font-weight: 700; }
+.product-form__submit { border-radius: 14px; min-height: 52px; }
+.product__info-container .product-form__input .select, .product__info-container .product-form__input input { border-radius: 12px; }
+@media screen and (max-width: 749px) {
+  .product__info-container { padding: 18px; border-radius: 20px; }
+  .product__media-wrapper .product__media { border-radius: 18px; }
+}

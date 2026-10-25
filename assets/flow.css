@@ -537,3 +537,15 @@ html[dir='rtl'] .h3 {
     transition: none;
   }
 }
+
+
+/* Infinity Flow refinement: compact half-disc cart target */
+.flow-dock__btn {
+  width: 68px; height: 48px;
+  border-radius: 36px 36px 0 0;
+  padding-top: 5px;
+  box-shadow: 0 10px 28px -8px rgba(20, 184, 196, .48), inset 0 0 0 1.5px rgba(255,255,255,.38);
+}
+.flow-dock__ring { border-radius: 36px 36px 0 0; inset: -7px -7px 0; }
+.flow-dock__count { inset-block-start: -3px; }
+.flow-dock__label { display: none !important; }
