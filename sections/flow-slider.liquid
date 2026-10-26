@@ -1,0 +1,79 @@
+{%- if section.blocks.size > 0 -%}
+<section class="fx-slider page-width fx-slider--{{ section.settings.height }}" data-fx-slider data-autoplay="{{ section.settings.autoplay }}" aria-roledescription="carousel" {{ section.shopify_attributes }}>
+  <div class="fx-slider__track">
+    {%- for block in section.blocks -%}
+      <div
+        class="fx-slide"
+        style="--s-bg: {{ block.settings.bg }}; --s-fg: {{ block.settings.fg }};"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="{{ forloop.index }} / {{ section.blocks.size }}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="fx-slide__body">
+          {%- if block.settings.badge != blank -%}<span class="fx-slide__badge">{{ block.settings.badge }}</span>{%- endif -%}
+          {%- if block.settings.heading != blank -%}<h2 class="fx-slide__title">{{ block.settings.heading }}</h2>{%- endif -%}
+          {%- if block.settings.text != blank -%}<p class="fx-slide__text">{{ block.settings.text }}</p>{%- endif -%}
+          {%- if block.settings.button_label != blank -%}
+            <a class="fx-slide__btn" href="{{ block.settings.link | default: routes.all_products_collection_url }}">
+              <span>{{ block.settings.button_label }}</span>
+              <span class="fx-slide__arrow">{%- render 'flow-icon', name: 'arrow' -%}</span>
+            </a>
+          {%- endif -%}
+        </div>
+        <div class="fx-slide__media">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: '(min-width: 750px) 450px, 50vw', alt: block.settings.image.alt | default: '' }}
+          {%- else -%}
+            <img src="{{ 'flow-slide-art.svg' | asset_url }}" alt="" width="400" height="400" loading="lazy">
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.blocks.size > 1 and section.settings.show_dots -%}
+    <div class="fx-dots" role="tablist">
+      {%- for block in section.blocks -%}
+        <button type="button" class="fx-dot" role="tab" data-fx-dot="{{ forloop.index0 }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ forloop.index }} / {{ section.blocks.size }}"></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Infinity slider",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "range", "id": "autoplay", "min": 0, "max": 10, "step": 1, "unit": "s", "label": "Auto-advance every (0 = off)", "default": 5 },
+    { "type": "select", "id": "height", "label": "Height", "default": "regular", "options": [ { "value": "compact", "label": "Compact" }, { "value": "regular", "label": "Regular" }, { "value": "tall", "label": "Tall" } ] },
+    { "type": "checkbox", "id": "show_dots", "label": "Show the dots", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "A PNG with a transparent background looks best. Leave empty for the built-in artwork." },
+        { "type": "color", "id": "bg", "label": "Background color", "default": "#0E4F4C" },
+        { "type": "color", "id": "fg", "label": "Text color", "default": "#F5F1E8" },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "Limited offer" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "First purchase, enjoy a special offer" },
+        { "type": "text", "id": "text", "label": "Text" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        { "type": "url", "id": "link", "label": "Button link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Infinity slider",
+      "blocks": [
+        { "type": "slide", "settings": { "bg": "#0E4F4C", "fg": "#F5F1E8", "badge": "Limited offer", "heading": "First purchase, enjoy a special offer", "button_label": "Shop now" } },
+        { "type": "slide", "settings": { "bg": "#D9BC7E", "fg": "#0B2E2C", "badge": "New", "heading": "Fresh arrivals just landed", "button_label": "Discover" } },
+        { "type": "slide", "settings": { "bg": "#DDEDEA", "fg": "#0B2E2C", "badge": "Free shipping", "heading": "Drag it to the cart, we do the rest", "button_label": "Start" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

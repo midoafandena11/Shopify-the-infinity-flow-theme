@@ -72,3 +72,62 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hook);
   else hook();
 })();
+
+/* Banner slider: dots, swipe state and optional autoplay. */
+(() => {
+  const init = (root) => {
+    root.querySelectorAll('[data-fx-slider]:not([data-ready])').forEach((el) => {
+      el.dataset.ready = '1';
+      const track = el.querySelector('.fx-slider__track');
+      const slides = [...track.children];
+      const dots = [...el.querySelectorAll('[data-fx-dot]')];
+      let cur = 0;
+      let timer = null;
+      const mark = () => {
+        const left = track.getBoundingClientRect().left;
+        let best = 0;
+        let min = Infinity;
+        slides.forEach((s, i) => {
+          const d = Math.abs(s.getBoundingClientRect().left - left);
+          if (d < min) { min = d; best = i; }
+        });
+        cur = best;
+        dots.forEach((d, i) => d.setAttribute('aria-selected', String(i === best)));
+      };
+      const go = (i) => {
+        const delta = slides[i].getBoundingClientRect().left - track.getBoundingClientRect().left;
+        track.scrollBy({ left: delta, behavior: 'smooth' });
+      };
+      let ticking = false;
+      track.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { mark(); ticking = false; });
+      }, { passive: true });
+      dots.forEach((d) => d.addEventListener('click', () => { go(Number(d.dataset.fxDot)); restart(); }));
+      const secs = Number(el.dataset.autoplay) || 0;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const stop = () => { clearInterval(timer); timer = null; };
+      const start = () => {
+        if (!secs || reduce || slides.length < 2 || timer) return;
+        timer = setInterval(() => { if (!document.hidden) go((cur + 1) % slides.length); }, secs * 1000);
+      };
+      const restart = () => { stop(); start(); };
+      ['pointerdown', 'focusin', 'mouseenter'].forEach((ev) => el.addEventListener(ev, stop));
+      ['pointerup', 'focusout', 'mouseleave'].forEach((ev) => el.addEventListener(ev, start));
+      start();
+    });
+  };
+  const boot = () => init(document);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  document.addEventListener('shopify:section:load', (e) => init(e.target));
+})();
+
+/* Product page: back button. */
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-fx-back]');
+  if (!b) return;
+  if (document.referrer && history.length > 1) history.back();
+  else window.location.href = b.dataset.fallback || '/';
+});

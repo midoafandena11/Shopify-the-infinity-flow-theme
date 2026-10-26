@@ -1,44 +1,52 @@
 {%- assign fx_icons = 'bag,shoe,watch,headphones,shirt,spark' | split: ',' -%}
-<section class="fx-band" {{ section.shopify_attributes }}>
-<div class="page-width">
-  {%- if section.settings.heading != blank -%}
-    <div class="fx-head"><h2 class="fx-title">{{ section.settings.heading }}</h2></div>
-  {%- endif -%}
-  <ul class="fx-cats" role="list">
-    {%- if section.settings.collections.size > 0 -%}
-      {%- for collection in section.settings.collections -%}
-        {%- assign fx_i = forloop.index0 | modulo: 6 -%}
-        <li>
-          <a class="fx-cat" href="{{ collection.url }}">
-            <span class="fx-cat__c{% if collection.featured_image == blank %} fx-cat__c--g{% endif %}">
-              {%- if collection.featured_image != blank -%}
-                {{ collection.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '100, 150, 200', alt: '' }}
-              {%- else -%}
-                {%- render 'flow-icon', name: fx_icons[fx_i] -%}
-              {%- endif -%}
-            </span>
-            <span class="fx-cat__t">{{ collection.title }}</span>
-          </a>
-        </li>
-      {%- endfor -%}
-    {%- else -%}
-      {%- for i in (0..5) -%}
-        <li>
-          <span class="fx-cat">
-            <span class="fx-cat__c fx-cat__c--g">{%- render 'flow-icon', name: fx_icons[i] -%}</span>
-            <span class="fx-cat__t">{{ section.settings.placeholder_label }}</span>
-          </span>
-        </li>
-      {%- endfor -%}
-    {%- endif -%}
-  </ul>
-</div>
+<section class="fx-cats-sec" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="fx-catcard">
+      {%- if section.settings.heading != blank or section.settings.link != blank -%}
+        <div class="fx-catcard__head">
+          <h2 class="fx-catcard__title">{{ section.settings.heading }}</h2>
+          {%- if section.settings.link != blank -%}
+            <a class="fx-catcard__more" href="{{ section.settings.link }}" aria-label="{{ 'flow.feed.view_all' | t }}">{%- render 'flow-icon', name: 'arrow' -%}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      <ul class="fx-cats" role="list">
+        {%- if section.settings.collections.size > 0 -%}
+          {%- for collection in section.settings.collections -%}
+            {%- assign fx_i = forloop.index0 | modulo: 6 -%}
+            <li>
+              <a class="fx-cat" href="{{ collection.url }}">
+                <span class="fx-cat__c{% if collection.featured_image == blank %} fx-cat__c--g{% endif %}">
+                  {%- if collection.featured_image != blank -%}
+                    {{ collection.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '100, 150, 200', alt: '' }}
+                  {%- else -%}
+                    {%- render 'flow-icon', name: fx_icons[fx_i] -%}
+                  {%- endif -%}
+                </span>
+                <span class="fx-cat__t">{{ collection.title }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (0..5) -%}
+            <li>
+              <span class="fx-cat">
+                <span class="fx-cat__c fx-cat__c--g">{%- render 'flow-icon', name: fx_icons[i] -%}</span>
+                <span class="fx-cat__t">{{ section.settings.placeholder_label }}</span>
+              </span>
+            </li>
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    </div>
+  </div>
 </section>
 {% schema %}
 {
   "name": "Infinity categories",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Top categories" },
+    { "type": "url", "id": "link", "label": "“View all” link" },
     { "type": "collection_list", "id": "collections", "label": "Collections", "limit": 12, "info": "Collections with an image show it inside the circle; the others get an icon." },
     { "type": "text", "id": "placeholder_label", "label": "Placeholder label (shown until you pick collections)", "default": "Category" }
   ],

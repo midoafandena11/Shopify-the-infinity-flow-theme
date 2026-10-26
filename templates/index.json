@@ -1,22 +1,9 @@
 {
   "sections": {
-    "hero": {
-      "type": "flow-hero",
-      "settings": {
-        "shade": 45,
-        "align": "start",
-        "show_demo": true,
-        "eyebrow": "Shopping without buttons",
-        "heading": "Drag it. Drop it. Done.",
-        "text": "Pick up anything you love and drop it into your cart. Shopping that flows.",
-        "button_label": "Start shopping",
-        "button2_label": "Browse categories"
-      }
-    },
     "categories": {
       "type": "flow-categories",
       "settings": {
-        "heading": "",
+        "heading": "Top categories",
         "placeholder_label": "Category"
       }
     },
@@ -118,11 +105,56 @@
         "t4"
       ],
       "settings": {}
+    },
+    "slider": {
+      "type": "flow-slider",
+      "blocks": {
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "bg": "#0E4F4C",
+            "fg": "#F5F1E8",
+            "badge": "Limited offer",
+            "heading": "First purchase, enjoy a special offer",
+            "button_label": "Shop now"
+          }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "bg": "#D9BC7E",
+            "fg": "#0B2E2C",
+            "badge": "New",
+            "heading": "Fresh arrivals just landed",
+            "button_label": "Discover"
+          }
+        },
+        "s3": {
+          "type": "slide",
+          "settings": {
+            "bg": "#DDEDEA",
+            "fg": "#0B2E2C",
+            "badge": "Free shipping",
+            "heading": "Drag it to the cart, we do the rest",
+            "button_label": "Start"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "autoplay": 5,
+        "height": "regular",
+        "show_dots": true
+      }
     }
   },
   "order": [
+    "slider",
     "categories",
-    "hero",
     "feed",
     "banners",
     "rail",

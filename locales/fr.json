@@ -539,5 +539,57 @@
       "expanded": "Formulaire de destinataire de carte-cadeau agrandi",
       "collapsed": "Formulaire de destinataire de carte-cadeau réduit"
     }
+  },
+  "flow": {
+    "dock": {
+      "aria": "Panier — déposez les produits ici",
+      "drop_here": "Déposer ici"
+    },
+    "card": {
+      "add_aria": "Ajouter {{ product_name }} au panier"
+    },
+    "hint": {
+      "mouse": "Faites glisser les articles ici pour les ajouter au panier",
+      "touch": "Appuyez longuement sur un article puis glissez-le ici pour l'ajouter au panier"
+    },
+    "sheet": {
+      "add": "Ajouter au panier",
+      "sold_out": "Épuisé",
+      "unavailable": "Indisponible"
+    },
+    "toast": {
+      "added": "[title] ajouté au panier",
+      "error": "Impossible d'ajouter au panier. Veuillez réessayer."
+    },
+    "nav": {
+      "home": "Accueil",
+      "search": "Recherche",
+      "shop": "Boutique",
+      "account": "Compte",
+      "label": "Navigation principale",
+      "cart": "Panier"
+    },
+    "ship": {
+      "add_more": "Ajoutez {{ amount }} pour la livraison gratuite",
+      "unlocked": "Livraison gratuite débloquée",
+      "intro": "Livraison gratuite dès {{ amount }} d'achats"
+    },
+    "feed": {
+      "hint_touch": "Appuyez longuement sur un produit puis glissez-le dans le panier",
+      "hint_mouse": "Faites glisser un produit sur le panier",
+      "grid_2": "Deux colonnes",
+      "grid_1": "Une colonne",
+      "view_all": "Tout voir"
+    },
+    "hero": {
+      "demo": "Glissez. Déposez. Terminé."
+    },
+    "lang": {
+      "label": "Langue"
+    },
+    "pdp": {
+      "hint": "Faites glisser l'image vers le panier",
+      "back": "Retour"
+    }
   }
 }

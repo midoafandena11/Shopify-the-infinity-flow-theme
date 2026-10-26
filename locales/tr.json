@@ -527,5 +527,57 @@
       "expanded": "Hediye kartı alıcısı formu genişletildi",
       "collapsed": "Hediye kartı alıcısı formu daraltıldı"
     }
+  },
+  "flow": {
+    "dock": {
+      "aria": "Sepet — ürünleri buraya bırakın",
+      "drop_here": "Buraya bırakın"
+    },
+    "card": {
+      "add_aria": "{{ product_name }} ürününü sepete ekle"
+    },
+    "hint": {
+      "mouse": "Ürünleri sepete eklemek için buraya sürükleyin",
+      "touch": "Bir ürüne basılı tutup buraya sürükleyerek sepete ekleyin"
+    },
+    "sheet": {
+      "add": "Sepete ekle",
+      "sold_out": "Tükendi",
+      "unavailable": "Mevcut değil"
+    },
+    "toast": {
+      "added": "[title] sepete eklendi",
+      "error": "Sepete eklenemedi. Lütfen tekrar deneyin."
+    },
+    "nav": {
+      "home": "Ana sayfa",
+      "search": "Ara",
+      "shop": "Mağaza",
+      "account": "Hesap",
+      "label": "Ana gezinme",
+      "cart": "Sepet"
+    },
+    "ship": {
+      "add_more": "Ücretsiz kargo için {{ amount }} daha ekleyin",
+      "unlocked": "Ücretsiz kargo kazandınız",
+      "intro": "{{ amount }} üzeri siparişlerde ücretsiz kargo"
+    },
+    "feed": {
+      "hint_touch": "Ürüne basılı tutup sepete sürükleyin",
+      "hint_mouse": "Herhangi bir ürünü sepete sürükleyin",
+      "grid_2": "İki sütun",
+      "grid_1": "Tek sütun",
+      "view_all": "Tümünü gör"
+    },
+    "hero": {
+      "demo": "Sürükle. Bırak. Bitti."
+    },
+    "lang": {
+      "label": "Dil"
+    },
+    "pdp": {
+      "hint": "Görseli sepete sürükleyin",
+      "back": "Geri"
+    }
   }
 }

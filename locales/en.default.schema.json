@@ -373,18 +373,72 @@
         }
       }
     },
-    "flow": {
-      "name": "Infinity Flow (drag & drop cart)",
+    "flow_style": {
+      "name": "Infinity: Style",
       "settings": {
-        "header": {
-          "content": "Drag & drop to cart"
+        "header__1": {
+          "content": "Brand colors"
+        },
+        "flow_brand": {
+          "label": "Main color",
+          "info": "Header, bottom bar, cart button and dark areas."
+        },
+        "flow_accent": {
+          "label": "Accent color",
+          "info": "Buttons, badges and highlights."
+        },
+        "flow_surface": {
+          "label": "Page background"
+        },
+        "flow_card": {
+          "label": "Card background"
+        },
+        "flow_ink": {
+          "label": "Text color"
+        },
+        "header__2": {
+          "content": "Shape and direction"
+        },
+        "flow_radius": {
+          "label": "Corner roundness",
+          "options__1": {
+            "label": "Sharp"
+          },
+          "options__2": {
+            "label": "Soft"
+          },
+          "options__3": {
+            "label": "Round"
+          }
+        },
+        "flow_dir": {
+          "label": "Text direction",
+          "info": "Auto follows the visitor's language: Arabic, Hebrew, Persian and Urdu are right-to-left.",
+          "options__1": {
+            "label": "Auto (by language)"
+          },
+          "options__2": {
+            "label": "Always left to right"
+          },
+          "options__3": {
+            "label": "Always right to left"
+          }
+        }
+      }
+    },
+    "flow": {
+      "name": "Infinity: Cart & drag",
+      "settings": {
+        "header__1": {
+          "content": "Drag and drop to cart"
         },
         "flow_enabled": {
-          "label": "Enable drag & drop to cart",
-          "info": "Shoppers drag a product onto a floating cart. A visible “+” button is always kept as an accessible alternative."
+          "label": "Enable drag and drop",
+          "info": "Shoppers drag a product onto the cart. The “+” button always stays as an alternative."
         },
         "flow_dock_position": {
-          "label": "Cart position",
+          "label": "Cart position (large screens)",
+          "info": "On phones the cart sits in the middle of the bottom bar.",
           "options__1": {
             "label": "Bottom end"
           },
@@ -396,36 +450,180 @@
           }
         },
         "flow_after_drop": {
-          "label": "After a product is dropped",
+          "label": "After an item is dropped",
           "options__1": {
-            "label": "Stay on the page (keep shopping)"
+            "label": "Stay on the page"
           },
           "options__2": {
-            "label": "Open the cart drawer"
+            "label": "Open the cart"
           }
         },
         "flow_show_hint": {
-          "label": "Show “drag to cart” hint",
-          "info": "A bubble beside the cart until the shopper completes their first drag."
+          "label": "Show the “drag here” bubble",
+          "info": "Stays until the shopper completes a first drag. Preview it any time by adding ?flow_hint=1 to the page address."
         },
         "flow_haptics": {
           "label": "Vibrate on touch devices"
         },
-        "flow_accent_1": {
-          "label": "Accent color 1"
-        },
-        "flow_accent_2": {
-          "label": "Accent color 2"
-        },
-        "flow_ink": {
-          "label": "Hint and toast color"
-        },
-        "flow_bottom_nav": {
-          "label": "Show bottom navigation bar on mobile"
+        "header__2": {
+          "content": "Free shipping bar"
         },
         "flow_free_ship": {
-          "label": "Free shipping threshold",
-          "info": "Amount in store currency for the cart progress bar. Use 0 to hide it."
+          "label": "Free shipping amount",
+          "info": "Amount in store currency. Use 0 to hide the bar."
+        }
+      }
+    },
+    "flow_nav": {
+      "name": "Infinity: Bottom bar",
+      "settings": {
+        "flow_bottom_nav": {
+          "label": "Show the bottom bar on phones",
+          "info": "The cart sits in the middle. Set up to four buttons around it."
+        },
+        "header__1": {
+          "content": "Button 1"
+        },
+        "flow_nav1_icon": {
+          "label": "Icon",
+          "options__1": {
+            "label": "Home"
+          },
+          "options__2": {
+            "label": "Search"
+          },
+          "options__3": {
+            "label": "Categories"
+          },
+          "options__4": {
+            "label": "Account"
+          },
+          "options__5": {
+            "label": "Heart"
+          },
+          "options__6": {
+            "label": "Bag"
+          },
+          "options__7": {
+            "label": "Star"
+          },
+          "options__8": {
+            "label": "Delivery"
+          }
+        },
+        "flow_nav1_label": {
+          "label": "Label (leave empty for the default)"
+        },
+        "flow_nav1_url": {
+          "label": "Link (leave empty for the default)"
+        },
+        "header__2": {
+          "content": "Button 2"
+        },
+        "flow_nav2_icon": {
+          "label": "Icon",
+          "options__1": {
+            "label": "Home"
+          },
+          "options__2": {
+            "label": "Search"
+          },
+          "options__3": {
+            "label": "Categories"
+          },
+          "options__4": {
+            "label": "Account"
+          },
+          "options__5": {
+            "label": "Heart"
+          },
+          "options__6": {
+            "label": "Bag"
+          },
+          "options__7": {
+            "label": "Star"
+          },
+          "options__8": {
+            "label": "Delivery"
+          }
+        },
+        "flow_nav2_label": {
+          "label": "Label (leave empty for the default)"
+        },
+        "flow_nav2_url": {
+          "label": "Link (leave empty for the default)"
+        },
+        "header__3": {
+          "content": "Button 3"
+        },
+        "flow_nav3_icon": {
+          "label": "Icon",
+          "options__1": {
+            "label": "Home"
+          },
+          "options__2": {
+            "label": "Search"
+          },
+          "options__3": {
+            "label": "Categories"
+          },
+          "options__4": {
+            "label": "Account"
+          },
+          "options__5": {
+            "label": "Heart"
+          },
+          "options__6": {
+            "label": "Bag"
+          },
+          "options__7": {
+            "label": "Star"
+          },
+          "options__8": {
+            "label": "Delivery"
+          }
+        },
+        "flow_nav3_label": {
+          "label": "Label (leave empty for the default)"
+        },
+        "flow_nav3_url": {
+          "label": "Link (leave empty for the default)"
+        },
+        "header__4": {
+          "content": "Button 4"
+        },
+        "flow_nav4_icon": {
+          "label": "Icon",
+          "options__1": {
+            "label": "Home"
+          },
+          "options__2": {
+            "label": "Search"
+          },
+          "options__3": {
+            "label": "Categories"
+          },
+          "options__4": {
+            "label": "Account"
+          },
+          "options__5": {
+            "label": "Heart"
+          },
+          "options__6": {
+            "label": "Bag"
+          },
+          "options__7": {
+            "label": "Star"
+          },
+          "options__8": {
+            "label": "Delivery"
+          }
+        },
+        "flow_nav4_label": {
+          "label": "Label (leave empty for the default)"
+        },
+        "flow_nav4_url": {
+          "label": "Link (leave empty for the default)"
         }
       }
     }

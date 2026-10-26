@@ -76,8 +76,23 @@
   <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
     <div class="page-width">
       <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
-        <div class="grid__item product__media-wrapper">
+        <div
+          class="grid__item product__media-wrapper"
+          {% if settings.flow_enabled and product.available %}
+            data-flow-card
+            data-flow-page="true"
+            data-flow-available="true"
+            data-flow-multi="false"
+            data-flow-title="{{ product.title | escape }}"
+          {% endif %}
+        >
+          <button type="button" class="fx-pdp-back" data-fx-back data-fallback="{{ routes.collections_url }}" aria-label="{{ 'flow.pdp.back' | t }}">
+            {%- render 'flow-icon', name: 'back' -%}
+          </button>
           {% render 'product-media-gallery', variant_images: variant_images %}
+          {%- if settings.flow_enabled and product.available -%}
+            <p class="fx-pdp-hint">{%- render 'flow-icon', name: 'spark' -%}<span>{{ 'flow.pdp.hint' | t }}</span></p>
+          {%- endif -%}
         </div>
         <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           <section

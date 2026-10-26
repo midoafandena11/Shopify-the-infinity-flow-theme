@@ -6,6 +6,11 @@
   if flow_rtl_langs contains flow_lang
     assign flow_dir = 'rtl'
   endif
+  if settings.flow_dir == 'rtl'
+    assign flow_dir = 'rtl'
+  elsif settings.flow_dir == 'ltr'
+    assign flow_dir = 'ltr'
+  endif
 -%}
 <html class="js" lang="{{ request.locale.iso_code }}" dir="{{ flow_dir }}">
   <head>
@@ -292,14 +297,36 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'infinity.css' | asset_url | stylesheet_tag }}
+    {%- liquid
+      assign fx_brand = settings.flow_brand | default: '#0E4F4C'
+      assign fx_accent = settings.flow_accent | default: '#D9BC7E'
+      assign fx_surface = settings.flow_surface | default: '#F5F1E8'
+      assign fx_card = settings.flow_card | default: '#FFFFFF'
+      assign fx_ink = settings.flow_ink | default: '#0B2E2C'
+      assign fx_radius = 24
+      if settings.flow_radius == 'sharp'
+        assign fx_radius = 8
+      elsif settings.flow_radius == 'soft'
+        assign fx_radius = 16
+      endif
+    -%}
+    <style>
+      :root {
+        --fx-teal: {{ fx_brand }};
+        --fx-teal-d: {{ fx_brand | color_darken: 10 }};
+        --fx-band: linear-gradient(180deg, {{ fx_brand | color_lighten: 6 }} 0%, {{ fx_brand | color_darken: 8 }} 100%);
+        --fx-gold: {{ fx_accent }};
+        --fx-gold-l: {{ fx_accent | color_lighten: 14 }};
+        --fx-cream: {{ fx_surface }};
+        --fx-card: {{ fx_card }};
+        --fx-ink: {{ fx_ink }};
+        --fx-r: {{ fx_radius }}px;
+        --flow-a: {{ fx_brand | color_lighten: 16 }};
+        --flow-b: {{ fx_brand }};
+        --flow-ink: {{ fx_ink }};
+      }
+    </style>
     {%- if settings.flow_enabled -%}
-      <style>
-        :root {
-          --flow-a: {{ settings.flow_accent_1 }};
-          --flow-b: {{ settings.flow_accent_2 }};
-          --flow-ink: {{ settings.flow_ink }};
-        }
-      </style>
       {{ 'flow.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">

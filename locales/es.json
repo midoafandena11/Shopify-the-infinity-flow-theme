@@ -539,5 +539,57 @@
       "expanded": "Formulario del destinatario de la tarjeta de regalo expandido",
       "collapsed": "Formulario del destinatario de tarjeta de regalo contraído"
     }
+  },
+  "flow": {
+    "dock": {
+      "aria": "Carrito — suelta los productos aquí",
+      "drop_here": "Suelta aquí"
+    },
+    "card": {
+      "add_aria": "Añadir {{ product_name }} al carrito"
+    },
+    "hint": {
+      "mouse": "Arrastra los artículos aquí para añadirlos al carrito",
+      "touch": "Mantén pulsado un artículo y arrástralo aquí para añadirlo al carrito"
+    },
+    "sheet": {
+      "add": "Añadir al carrito",
+      "sold_out": "Agotado",
+      "unavailable": "No disponible"
+    },
+    "toast": {
+      "added": "[title] añadido al carrito",
+      "error": "No se pudo añadir al carrito. Inténtalo de nuevo."
+    },
+    "nav": {
+      "home": "Inicio",
+      "search": "Buscar",
+      "shop": "Tienda",
+      "account": "Cuenta",
+      "label": "Navegación principal",
+      "cart": "Carrito"
+    },
+    "ship": {
+      "add_more": "Añade {{ amount }} más para envío gratis",
+      "unlocked": "Has desbloqueado el envío gratis",
+      "intro": "Envío gratis en pedidos desde {{ amount }}"
+    },
+    "feed": {
+      "hint_touch": "Mantén pulsado un producto y arrástralo al carrito",
+      "hint_mouse": "Arrastra cualquier producto al carrito",
+      "grid_2": "Dos columnas",
+      "grid_1": "Una columna",
+      "view_all": "Ver todo"
+    },
+    "hero": {
+      "demo": "Arrastra. Suelta. Listo."
+    },
+    "lang": {
+      "label": "Idioma"
+    },
+    "pdp": {
+      "hint": "Arrastra la imagen al carrito",
+      "back": "Volver"
+    }
   }
 }

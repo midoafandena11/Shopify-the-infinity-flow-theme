@@ -27,7 +27,7 @@
       aria-label="{{ 'flow.dock.aria' | t }}"
     >
       <span class="flow-dock__ring" aria-hidden="true"></span>
-      <span class="flow-dock__icon" aria-hidden="true">{{- 'icon-cart.svg' | inline_asset_content -}}</span>
+      <span class="flow-dock__icon" aria-hidden="true">{%- render 'flow-icon', name: 'cart' -%}</span>
       <span class="flow-dock__count{% if cart.item_count == 0 %} hidden{% endif %}">{{ cart.item_count }}</span>
     </a>
 

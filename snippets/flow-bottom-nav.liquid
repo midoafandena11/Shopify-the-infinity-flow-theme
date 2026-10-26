@@ -1,17 +1,66 @@
 {%- if settings.flow_bottom_nav -%}
   <nav class="fx-nav" aria-label="{{ 'flow.nav.label' | t }}">
-    <a href="{{ routes.root_url }}"{% if request.page_type == 'index' %} aria-current="page"{% endif %}>
-      {%- render 'flow-icon', name: 'home' -%}<span>{{ 'flow.nav.home' | t }}</span>
-    </a>
-    <a href="{{ routes.search_url }}"{% if request.page_type == 'search' %} aria-current="page"{% endif %}>
-      {%- render 'flow-icon', name: 'search' -%}<span>{{ 'flow.nav.search' | t }}</span>
-    </a>
-    <span class="fx-nav__gap" aria-hidden="true">{{ 'flow.nav.cart' | t }}</span>
-    <a href="{{ routes.collections_url }}"{% if request.page_type == 'collection' or request.page_type == 'list-collections' %} aria-current="page"{% endif %}>
-      {%- render 'flow-icon', name: 'grid' -%}<span>{{ 'flow.nav.shop' | t }}</span>
-    </a>
-    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"{% if request.page_type contains 'customers' %} aria-current="page"{% endif %}>
-      {%- render 'flow-icon', name: 'user' -%}<span>{{ 'flow.nav.account' | t }}</span>
-    </a>
+    {%- for i in (1..4) -%}
+      {%- liquid
+        assign k_icon = 'flow_nav' | append: i | append: '_icon'
+        assign k_label = 'flow_nav' | append: i | append: '_label'
+        assign k_url = 'flow_nav' | append: i | append: '_url'
+        assign nav_icon = settings[k_icon]
+        assign nav_label = settings[k_label]
+        assign nav_url = settings[k_url]
+        assign is_current = false
+        if i == 1
+          assign d_label = 'flow.nav.home' | t
+          assign d_url = routes.root_url
+          assign d_icon = 'home'
+          if request.page_type == 'index'
+            assign is_current = true
+          endif
+        elsif i == 2
+          assign d_label = 'flow.nav.search' | t
+          assign d_url = routes.search_url
+          assign d_icon = 'search'
+          if request.page_type == 'search'
+            assign is_current = true
+          endif
+        elsif i == 3
+          assign d_label = 'flow.nav.shop' | t
+          assign d_url = routes.collections_url
+          assign d_icon = 'grid'
+          if request.page_type == 'collection' or request.page_type == 'list-collections'
+            assign is_current = true
+          endif
+        else
+          assign d_label = 'flow.nav.account' | t
+          assign d_icon = 'user'
+          if customer
+            assign d_url = routes.account_url
+          else
+            assign d_url = routes.account_login_url
+          endif
+          if request.page_type contains 'customers'
+            assign is_current = true
+          endif
+        endif
+        if nav_label == blank
+          assign nav_label = d_label
+        endif
+        if nav_icon == blank
+          assign nav_icon = d_icon
+        endif
+        if nav_url == blank
+          assign nav_url = d_url
+        else
+          assign is_current = false
+          if nav_url == request.path
+            assign is_current = true
+          endif
+        endif
+      -%}
+      {%- if i == 3 -%}<span class="fx-nav__gap" aria-hidden="true"></span>{%- endif -%}
+      <a href="{{ nav_url }}"{% if is_current %} aria-current="page"{% endif %}>
+        {%- render 'flow-icon', name: nav_icon -%}<span>{{ nav_label }}</span>
+      </a>
+    {%- endfor -%}
   </nav>
 {%- endif -%}

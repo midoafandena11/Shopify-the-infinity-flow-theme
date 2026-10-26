@@ -537,8 +537,8 @@
       "add_aria": "Add {{ product_name }} to cart"
     },
     "hint": {
-      "mouse": "Drag a product here",
-      "touch": "Hold & drag a product here"
+      "mouse": "Drag items here to add to cart",
+      "touch": "Press and hold an item, then drag it here to add to cart"
     },
     "sheet": {
       "add": "Add to cart",
@@ -574,6 +574,10 @@
     },
     "lang": {
       "label": "Language"
+    },
+    "pdp": {
+      "hint": "Drag the image to the cart",
+      "back": "Back"
     }
   }
 }

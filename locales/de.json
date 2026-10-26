@@ -527,5 +527,57 @@
       "expanded": "Formular für den Empfänger des Gutscheins erweitert",
       "collapsed": "Formular für den Empfänger des Gutscheins minimiert"
     }
+  },
+  "flow": {
+    "dock": {
+      "aria": "Warenkorb — Produkte hier ablegen",
+      "drop_here": "Hier ablegen"
+    },
+    "card": {
+      "add_aria": "{{ product_name }} in den Warenkorb legen"
+    },
+    "hint": {
+      "mouse": "Artikel hierher ziehen, um sie in den Warenkorb zu legen",
+      "touch": "Artikel gedrückt halten und hierher ziehen, um ihn in den Warenkorb zu legen"
+    },
+    "sheet": {
+      "add": "In den Warenkorb",
+      "sold_out": "Ausverkauft",
+      "unavailable": "Nicht verfügbar"
+    },
+    "toast": {
+      "added": "[title] zum Warenkorb hinzugefügt",
+      "error": "Hinzufügen nicht möglich. Bitte erneut versuchen."
+    },
+    "nav": {
+      "home": "Start",
+      "search": "Suche",
+      "shop": "Shop",
+      "account": "Konto",
+      "label": "Hauptnavigation",
+      "cart": "Warenkorb"
+    },
+    "ship": {
+      "add_more": "Noch {{ amount }} bis zum kostenlosen Versand",
+      "unlocked": "Kostenloser Versand freigeschaltet",
+      "intro": "Kostenloser Versand ab {{ amount }}"
+    },
+    "feed": {
+      "hint_touch": "Produkt gedrückt halten und in den Warenkorb ziehen",
+      "hint_mouse": "Beliebiges Produkt auf den Warenkorb ziehen",
+      "grid_2": "Zwei Spalten",
+      "grid_1": "Eine Spalte",
+      "view_all": "Alle ansehen"
+    },
+    "hero": {
+      "demo": "Ziehen. Ablegen. Fertig."
+    },
+    "lang": {
+      "label": "Sprache"
+    },
+    "pdp": {
+      "hint": "Bild in den Warenkorb ziehen",
+      "back": "Zurück"
+    }
   }
 }

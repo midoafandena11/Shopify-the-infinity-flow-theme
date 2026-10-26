@@ -23,6 +23,11 @@
         localStorage.setItem(k, v);
       } catch (e) {}
     },
+    del(k) {
+      try {
+        localStorage.removeItem(k);
+      } catch (e) {}
+    },
   };
 
   class FlowDock extends HTMLElement {
@@ -82,6 +87,7 @@
       if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
         subscribe(PUB_SUB_EVENTS.cartUpdate, () => this.refreshCount());
       }
+      if (store.get('flow_learned')) document.documentElement.classList.add('flow-learned');
       this.showHintSoon();
     }
 
@@ -91,7 +97,9 @@
       if (this.state || !e.isPrimary || e.button > 0) return;
       const card = e.target.closest?.('[data-flow-card]');
       if (!card || card.dataset.flowAvailable !== 'true') return;
-      if (e.target.closest('[data-flow-add], input, select, textarea, button, quick-add-modal, .fx-card__info')) return;
+      const blocked = e.target.closest('[data-flow-add], input, select, textarea, button, quick-add-modal, .fx-card__info');
+      const pageImage = card.dataset.flowPage && !e.target.closest('.thumbnail, .slider-button, .fx-pdp-back, [data-flow-add]');
+      if (blocked && !pageImage) return;
 
       const touch = e.pointerType !== 'mouse';
       const s = (this.state = {
@@ -181,6 +189,8 @@
       this.teardown();
       if (dropped) {
         this._viaDrag = true;
+        store.set('flow_learned', '1');
+        document.documentElement.classList.add('flow-learned');
         this.fly(ghost, this.target).then(() => ghost.remove());
         this.choose(card);
       } else {
@@ -223,7 +233,7 @@
       const ghost = document.createElement('div');
       ghost.className = 'flow-ghost';
       ghost.setAttribute('aria-hidden', 'true');
-      const img = card.querySelector('.fx-card__img, .card__media img');
+      const img = card.querySelector('.fx-card__img, .card__media img, .product__media-item.is-active img, .product__media img, .product-media-container img');
       if (img) {
         const clone = document.createElement('img');
         clone.src = img.currentSrc || img.src;
@@ -257,6 +267,13 @@
     }
 
     submit(card) {
+      if (card.dataset.flowPage) {
+        // product page: use the page's own form so the selected variant and quantity are respected
+        const btn = document.querySelector('product-form button[name="add"], form[action*="/cart/add"] button[name="add"]');
+        if (!btn || btn.disabled || btn.getAttribute('aria-disabled') === 'true') this.fail(str().sheet_unavailable);
+        else btn.click();
+        return;
+      }
       const form = card.querySelector('form[data-flow-form]');
       // A real click on a real submit button: pixels and apps listening for it still fire.
       form?.querySelector('[data-flow-submit]')?.click();
@@ -363,6 +380,14 @@
     }
 
     showHintSoon() {
+      const force = /[?&]flow_hint=1/.test(window.location.search) || (window.Shopify && Shopify.designMode);
+      if (force) {
+        store.del('flow_learned');
+        document.documentElement.classList.remove('flow-learned');
+        try {
+          sessionStorage.removeItem('flow_hint_closed');
+        } catch (e) {}
+      }
       if (this.dataset.hint !== 'true' || store.get('flow_learned')) return;
       if (!document.querySelector('[data-flow-card]')) return;
       let counted = null;
@@ -377,7 +402,6 @@
           sessionStorage.setItem('flow_session', '1');
         } catch (e) {}
       }
-      if (visits >= 6) return; // stop nagging returning visitors who never dragged
       this._hintTimer = setTimeout(() => {
         const coarse = window.matchMedia('(pointer: coarse)').matches;
         this.hintEl.querySelector('span').textContent = coarse ? str().hint_touch : str().hint_mouse;
