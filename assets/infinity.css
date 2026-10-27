@@ -500,3 +500,21 @@ flow-dock.is-hot .flow-dock__btn { box-shadow: 0 14px 40px -6px rgba(217, 188, 1
 .product-form__submit::before, .product-form__submit::after { display: none !important; }
 .product-form__submit:hover { background: var(--fx-teal); }
 .shopify-payment-button { display: none; }
+
+/* ==========================================================================
+   v3.1: hint bubble, notched bottom bar, product title and price on own lines
+   ========================================================================== */
+.flow-hint { width: max-content; max-width: min(268px, calc(100vw - 32px)); align-items: center; box-sizing: border-box; }
+.flow-hint > span { flex: 1 1 0; min-width: 0; white-space: normal; overflow-wrap: anywhere; line-height: 1.4; }
+.flow-hint__arrow, .flow-hint__x { flex: none; }
+@media screen and (max-width: 749px) {
+  /* the bar carves a half-circle around the cart */
+  .fx-nav { background: radial-gradient(circle 43px at 50% 8px, transparent 42px, var(--fx-cream) 43px); box-shadow: none; filter: drop-shadow(0 -8px 14px rgba(8, 58, 56, 0.16)); }
+  .fx-nav::before { display: none; }
+  body.has-flow-nav flow-dock.flow-dock--nav { inset-block-end: calc(36px + env(safe-area-inset-bottom, 0px)); }
+  .flow-dock--nav .flow-dock__btn { box-shadow: 0 14px 24px -10px rgba(8, 58, 56, 0.7), inset 0 0 0 1.5px rgba(255, 255, 255, 0.3); }
+  .flow-dock--nav .flow-hint, .flow-dock--nav .flow-toast, .flow-dock--nav .flow-dock__label { inset-block-end: calc(100% + 18px); }
+}
+.product__info-container .product__title { flex: 1 1 100%; }
+.product__info-container [id^='price-'] { flex: 1 1 100%; }
+.product__info-container .price__container { justify-content: flex-start; }

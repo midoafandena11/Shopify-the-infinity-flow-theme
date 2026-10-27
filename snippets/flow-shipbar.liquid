@@ -18,7 +18,6 @@
     data-t-intro="{{ 'flow.ship.intro' | t: amount: '[amount]' | escape }}"
     data-t-more="{{ 'flow.ship.add_more' | t: amount: '[amount]' | escape }}"
     data-t-done="{{ 'flow.ship.unlocked' | t | escape }}"
-    {{ section.shopify_attributes }}
   >
     <div class="page-width fx-shipbar__in">
       <p class="fx-shipbar__t">
@@ -40,12 +39,3 @@
     </div>
   </div>
 {%- endif -%}
-{% schema %}
-{
-  "name": "Infinity shipping bar",
-  "settings": [
-    { "type": "paragraph", "content": "Uses the free shipping amount set in Theme settings > Infinity Flow." }
-  ],
-  "presets": [ { "name": "Infinity shipping bar" } ]
-}
-{% endschema %}

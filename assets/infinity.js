@@ -131,3 +131,23 @@ document.addEventListener('click', (e) => {
   if (document.referrer && history.length > 1) history.back();
   else window.location.href = b.dataset.fallback || '/';
 });
+
+/* Product page: keep the active thumbnail visible in the floating strip. */
+(() => {
+  const watch = () => {
+    document.querySelectorAll('.thumbnail-slider .thumbnail-list').forEach((list) => {
+      if (list.dataset.fxWatch) return;
+      list.dataset.fxWatch = '1';
+      new MutationObserver(() => {
+        const t = list.querySelector('.thumbnail[aria-current="true"]');
+        if (!t) return;
+        const r = t.getBoundingClientRect();
+        const lr = list.getBoundingClientRect();
+        if (r.top < lr.top || r.bottom > lr.bottom) list.scrollTo({ top: t.offsetTop - list.offsetTop - 8, behavior: 'smooth' });
+      }).observe(list, { subtree: true, attributes: true, attributeFilter: ['aria-current'] });
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watch);
+  else watch();
+  document.addEventListener('shopify:section:load', watch);
+})();

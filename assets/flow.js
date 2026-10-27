@@ -405,24 +405,9 @@
       this._hintTimer = setTimeout(() => {
         const coarse = window.matchMedia('(pointer: coarse)').matches;
         this.hintEl.querySelector('span').textContent = coarse ? str().hint_touch : str().hint_mouse;
-        // show the hint only while a draggable product is actually on screen
-        const seen = new Set();
-        this._hintIO = new IntersectionObserver((entries) => {
-          entries.forEach((en) => (en.isIntersecting ? seen.add(en.target) : seen.delete(en.target)));
-          const show = seen.size > 0 && !this.state?.active;
-          if (show) {
-            this.hintEl.hidden = false;
-            this.classList.add('has-hint');
-            requestAnimationFrame(() => this.hintEl.classList.add('is-visible'));
-          } else {
-            this.hintEl.classList.remove('is-visible');
-            this.classList.remove('has-hint');
-            setTimeout(() => {
-              if (!this.hintEl.classList.contains('is-visible')) this.hintEl.hidden = true;
-            }, 350);
-          }
-        }, { threshold: 0.4 });
-        document.querySelectorAll('[data-flow-card]').forEach((el) => this._hintIO.observe(el));
+        this.hintEl.hidden = false;
+        this.classList.add('has-hint');
+        requestAnimationFrame(() => this.hintEl.classList.add('is-visible'));
       }, 1200);
     }
 

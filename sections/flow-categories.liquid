@@ -11,7 +11,24 @@
         </div>
       {%- endif -%}
       <ul class="fx-cats" role="list">
-        {%- if section.settings.collections.size > 0 -%}
+        {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
+          {%- for link in section.settings.menu.links -%}
+            {%- assign fx_i = forloop.index0 | modulo: 6 -%}
+            {%- assign fx_img = link.object.featured_image -%}
+            <li>
+              <a class="fx-cat" href="{{ link.url }}">
+                <span class="fx-cat__c{% if fx_img == blank %} fx-cat__c--g{% endif %}">
+                  {%- if fx_img != blank -%}
+                    {{ fx_img | image_url: width: 200 | image_tag: loading: 'lazy', widths: '100, 150, 200', alt: '' }}
+                  {%- else -%}
+                    {%- render 'flow-icon', name: fx_icons[fx_i] -%}
+                  {%- endif -%}
+                </span>
+                <span class="fx-cat__t">{{ link.title }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        {%- elsif section.settings.collections.size > 0 -%}
           {%- for collection in section.settings.collections -%}
             {%- assign fx_i = forloop.index0 | modulo: 6 -%}
             <li>
@@ -47,6 +64,7 @@
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Top categories" },
     { "type": "url", "id": "link", "label": "“View all” link" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "info": "Optional: build the circles from a menu (Online Store > Navigation). If empty, the collections below are used." },
     { "type": "collection_list", "id": "collections", "label": "Collections", "limit": 12, "info": "Collections with an image show it inside the circle; the others get an icon." },
     { "type": "text", "id": "placeholder_label", "label": "Placeholder label (shown until you pick collections)", "default": "Category" }
   ],
