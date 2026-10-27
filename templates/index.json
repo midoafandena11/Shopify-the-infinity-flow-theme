@@ -17,6 +17,9 @@
         "link": "",
         "menu": "",
         "collections": [
+          "frontpage",
+          "product-1",
+          "hydrogen",
           "automated-collection"
         ],
         "placeholder_label": "Category"
