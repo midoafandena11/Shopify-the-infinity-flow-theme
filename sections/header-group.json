@@ -14,23 +14,144 @@
     "header": {
       "type": "header",
       "settings": {
-        "color_scheme": "scheme-3",
-        "menu_color_scheme": "scheme-3",
         "logo_position": "middle-center",
+        "mobile_logo_position": "center",
         "menu": "main-menu",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": false,
+        "color_scheme": "scheme-3",
+        "menu_color_scheme": "scheme-3",
         "enable_country_selector": true,
         "enable_language_selector": false,
-        "mobile_logo_position": "center",
         "margin_bottom": 0,
         "padding_top": 8,
         "padding_bottom": 8
       }
+    },
+    "flow_hero_XAQqRP": {
+      "type": "flow-hero",
+      "name": "Infinity hero",
+      "settings": {
+        "shade": 60,
+        "align": "start",
+        "show_demo": true,
+        "eyebrow": "Shopping without buttons",
+        "heading": "Drag it. Drop it. Done.",
+        "text": "Pick up anything you love and drop it into your cart. Shopping that flows.",
+        "button_label": "Start shopping",
+        "button_link": "",
+        "button2_label": "Browse categories",
+        "button2_link": ""
+      }
+    },
+    "flow_promo_6GwBmY": {
+      "type": "flow-promo",
+      "blocks": {
+        "tile_bjqx3E": {
+          "type": "tile",
+          "settings": {
+            "art": "a",
+            "tag": "New",
+            "heading": "Fresh arrivals",
+            "text": "Just landed. Drag your favorites to the cart.",
+            "label": "Shop now",
+            "link": ""
+          }
+        },
+        "tile_PJX3a3": {
+          "type": "tile",
+          "settings": {
+            "art": "b",
+            "tag": "Limited",
+            "heading": "Best sellers",
+            "text": "What everyone is dropping in their cart.",
+            "label": "Discover",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "tile_bjqx3E",
+        "tile_PJX3a3"
+      ],
+      "name": "Infinity banners",
+      "settings": {}
+    },
+    "flow_hero_YtVD3H": {
+      "type": "flow-hero",
+      "name": "Infinity hero",
+      "settings": {
+        "shade": 60,
+        "align": "start",
+        "show_demo": true,
+        "eyebrow": "Shopping without buttons",
+        "heading": "Drag it. Drop it. Done.",
+        "text": "Pick up anything you love and drop it into your cart. Shopping that flows.",
+        "button_label": "Start shopping",
+        "button_link": "",
+        "button2_label": "Browse categories",
+        "button2_link": ""
+      }
+    },
+    "flow_slider_pMRBQ6": {
+      "type": "flow-slider",
+      "blocks": {
+        "slide_3XMXWN": {
+          "type": "slide",
+          "settings": {
+            "bg": "#0e4f4c",
+            "fg": "#f5f1e8",
+            "badge": "Limited offer",
+            "heading": "First purchase, enjoy a special offer",
+            "text": "",
+            "button_label": "Shop now",
+            "link": ""
+          }
+        },
+        "slide_Cgmtmg": {
+          "type": "slide",
+          "settings": {
+            "bg": "#d9bc7e",
+            "fg": "#0b2e2c",
+            "badge": "New",
+            "heading": "Fresh arrivals just landed",
+            "text": "",
+            "button_label": "Discover",
+            "link": ""
+          }
+        },
+        "slide_rCbRCe": {
+          "type": "slide",
+          "settings": {
+            "bg": "#ddedea",
+            "fg": "#0b2e2c",
+            "badge": "Free shipping",
+            "heading": "Drag it to the cart, we do the rest",
+            "text": "",
+            "button_label": "Start",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_3XMXWN",
+        "slide_Cgmtmg",
+        "slide_rCbRCe"
+      ],
+      "name": "Infinity slider",
+      "settings": {
+        "autoplay": 5,
+        "height": "regular",
+        "show_dots": true
+      }
     }
   },
   "order": [
-    "header"
+    "header",
+    "flow_hero_XAQqRP",
+    "flow_promo_6GwBmY",
+    "flow_hero_YtVD3H",
+    "flow_slider_pMRBQ6"
   ]
 }
