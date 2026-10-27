@@ -47,52 +47,8 @@
     },
     "flow_promo_6GwBmY": {
       "type": "flow-promo",
-      "blocks": {
-        "tile_bjqx3E": {
-          "type": "tile",
-          "settings": {
-            "art": "a",
-            "tag": "New",
-            "heading": "Fresh arrivals",
-            "text": "Just landed. Drag your favorites to the cart.",
-            "label": "Shop now",
-            "link": ""
-          }
-        },
-        "tile_PJX3a3": {
-          "type": "tile",
-          "settings": {
-            "art": "b",
-            "tag": "Limited",
-            "heading": "Best sellers",
-            "text": "What everyone is dropping in their cart.",
-            "label": "Discover",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "tile_bjqx3E",
-        "tile_PJX3a3"
-      ],
       "name": "Infinity banners",
       "settings": {}
-    },
-    "flow_hero_YtVD3H": {
-      "type": "flow-hero",
-      "name": "Infinity hero",
-      "settings": {
-        "shade": 60,
-        "align": "start",
-        "show_demo": true,
-        "eyebrow": "Shopping without buttons",
-        "heading": "Drag it. Drop it. Done.",
-        "text": "Pick up anything you love and drop it into your cart. Shopping that flows.",
-        "button_label": "Start shopping",
-        "button_link": "",
-        "button2_label": "Browse categories",
-        "button2_link": ""
-      }
     },
     "flow_slider_pMRBQ6": {
       "type": "flow-slider",
@@ -151,7 +107,6 @@
     "header",
     "flow_hero_XAQqRP",
     "flow_promo_6GwBmY",
-    "flow_hero_YtVD3H",
     "flow_slider_pMRBQ6"
   ]
 }
